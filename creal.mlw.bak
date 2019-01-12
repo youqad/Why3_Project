@@ -1,0 +1,171 @@
+(**** II. ***)
+(************)
+
+use mach.int.Int
+use real.RealInfix
+use int.Power
+use int.EuclideanDivision as ED
+
+use ref.Refint
+
+let power2 (l : int) : int 
+  requires { 0 <= l }
+  ensures { result = power 2 l }
+  =   
+    let res = ref 1 in
+    for i=0 to l-1 do invariant { !res = power 2 i }
+      res *= 2
+    done;
+    !res
+
+let shift_left (z: int) (l:int) : int
+  requires { 0 <= l }
+  ensures { result = z * (power 2 l) } 
+  = 
+    z * power2 l
+
+let ediv_mod (x:int) (y:int) : (int, int)
+  requires { 0 < y }
+  ensures { let d, r = result in 
+  d = ED.div x y /\ r = ED.mod x y }
+  =
+    let x_abs = if x >= 0 then x else -x in
+    let d = ref 0 in
+    let r = ref x_abs in
+    while !r >= y do 
+      invariant { !r >= 0 && x_abs = !d * y + !r}
+      variant { !r }
+      incr d;
+      r -= y
+    done;
+    if x >= 0 then (* assert { x = !d * y + !r }; *)
+        (!d, !r)
+    else 
+      if !r = 0 then (* assert { x = - !d * y }; *)
+        (- !d, 0)
+      else (* assert { x =  (- !d - 1) * y + y - !r && 0 <= y - !r < y } *)
+        (- !d - 1, y - !r)
+
+
+let shift_right (z: int) (l:int) : int
+  requires { 0 <= l }
+  ensures { result = ED.div z (power 2 l) }
+  =
+  let d, _ = ediv_mod z (power2 l) in d
+  
+use real.Square
+use real.FromInt
+use real.Truncate
+
+let function isqrt (n:int) : int
+  requires { 0 <= n }
+  ensures { result = floor (sqrt (from_int n)) }
+  =
+    let count = ref 0 in 
+    let sum = ref 1 in 
+    while !sum <= n do
+      invariant { 0 <= !count }
+      invariant { power !count 2 <= n }
+      invariant { !sum = power (!count+1) 2 }
+      variant {n - !sum}
+      incr count;
+      sum += 2 * !count + 1
+    done;
+    assert { !count <= floor (sqrt (from_int n)) 
+      by  let z = from_int !count in 
+          z*.z <=. from_int n && z >=. 0.
+      so  sqrt (z*.z) = z
+          && sqrt (z*.z) <=. sqrt (from_int n)
+      so  z <=. sqrt (from_int n)
+      so  floor z <= floor (sqrt (from_int n))
+    };
+    assert { sqrt (from_int n) <. from_int (!count + 1)
+      by  let cplus1 = !count + 1 in 
+          let z = cplus1 * cplus1 in 
+          n < z && cplus1 >= 0
+      so  from_int n <=. from_int z && from_int cplus1 >=. 0.
+          && not (from_int n = from_int z)
+      so  sqrt (from_int n) <=. sqrt (from_int z)
+          && sqrt (from_int z) = from_int cplus1
+          && not (sqrt (from_int n) = sqrt (from_int z))
+      so  sqrt (from_int n) <=. from_int cplus1
+          && not (sqrt (from_int n) = from_int cplus1)
+    };
+    !count
+
+(**** III. ****)
+(**************)
+
+use real.PowerReal
+
+constant b : real = 4.0
+
+function _B (n:int) : real = pow b (from_int n)
+
+lemma _B_non_neg: forall n:int. _B n >=. 0.
+
+lemma _B_group_homomorphism: 
+  forall n m:int. _B n *. _B m = _B (n+m)
+
+lemma _B_inverse: 
+  forall n:int. _B n *. _B (-n) = 1.
+  
+lemma _B_sqrt_mul:
+  forall a:real, n:int. 0. <=. a -> sqrt (a *. _B (2 * n)) = sqrt a *. _B n
+
+lemma _B_spec_pos:
+  forall n:int. 0 <= n -> _B n = from_int (power 4 n)
+
+lemma _B_spec_neg_0:  
+  forall n:int. n < 0 -> _B n *. from_int (power 4 (-n)) = 1.
+
+lemma _B_spec_neg:
+  forall n:int. n < 0 -> _B n = inv (from_int (power 4 (-n)))
+
+lemma pow_mul2_exp:
+  forall n:int. 0 <= n -> power 2 (2*n) = power 4 n
+  
+predicate framing (x:real) (p:int) (n:int) =
+  (from_int p -. 1.) *. (_B (-n)) <. x <. (from_int p +. 1.) *. (_B (-n))  
+
+let round_z_over_4 (z : int)
+  ensures { ((from_int z) -. 2.) *. (_B (-1)) 
+  <. from_int result <=. ((from_int z) +. 2.) *. (_B (-1)) }
+  =
+  let res = shift_right (z + 2) 2 in
+    assert {    from_int res <=. ((from_int z) +. 2.) *. (_B (-1))
+            by  res * 4 <= z + 2
+            so  from_int res <=. from_int (z + 2) *. inv 4. };
+    assert {    from_int (z-2) <. from_int res *. 4.
+            by  z + 2 = 4 * res + (ED.mod (z+2) 4) 
+            so  z-2 < z + 2 - (ED.mod (z+2) 4) = 4 * res };
+    res
+
+let compute_round (n:int) (ghost z : real) (zp: int)
+  requires { (from_int zp -. 2.) *. _B (-(n+1)) <. z 
+  <=. (from_int zp +. 2.) *. _B (-(n+1)) }
+  ensures { framing z result n } 
+  =
+  let resu = round_z_over_4 zp in
+  assert {    z <=. (from_int resu +. 1.) *. _B (-n) 
+          by  z <=. (from_int zp +. 2.) *. _B (-(n+1))
+                 =  (from_int zp -. 2.) *. _B (-(n+1)) +. _B (-n)
+                 =  (from_int zp -. 2.) *. _B (-1) *. _B (-n) +. _B (-n) 
+                 <.  from_int (resu) *. _B (-n) +. _B (-n) };
+  assert {    z >.  (from_int resu -. 1.) *. _B (-n) 
+          by  z >.  (from_int zp -. 2.) *. _B (-(n+1))
+                 =  (from_int zp -. 2.) *. _B (-1) *. _B (-n)
+                 =  ((from_int zp +. 2.) *. _B (-1) -. 1.) *. _B (-n) 
+                >=. (from_int resu -. 1.) *. _B (-n)  };
+  resu
+
+let compute_add (n: int) (ghost x : real) (xp : int) (ghost y : real) (yp : int)
+  requires { framing x xp (n+1) }
+  requires { framing y yp (n+1) }
+  ensures { framing (x+.y) result n }
+  =
+  compute_round n (x +. y) (xp + yp)
+
+
+
+  

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<file name="../creal.mlw" proved="true">
+<theory name="Top">
+ <goal name="VC power2">
+ <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="42"/></proof>
+ </goal>
+ <goal name="VC shift_left">
+ <proof prover="0" obsolete="true"><result status="valid" time="0.00" steps="0"/></proof>
+ </goal>
+ <goal name="VC ediv_mod">
+ <transf name="split_vc" >
+  <goal name="VC ediv_mod.0">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="4"/></proof>
+  </goal>
+  <goal name="VC ediv_mod.1">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="4"/></proof>
+  </goal>
+  <goal name="VC ediv_mod.2">
+  <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  </goal>
+  <goal name="VC ediv_mod.0">
+  <proof prover="0"><undone/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

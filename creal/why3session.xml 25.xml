@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="2" name="Eprover" version="2.2" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="3" name="CVC4" version="1.6" timelimit="5" steplimit="0" memlimit="1000"/>
+<file name="../creal.mlw">
+<theory name="Top">
+ <goal name="VC power2" expl="VC for power2" proved="true">
+ <proof prover="3"><result status="valid" time="0.05"/></proof>
+ </goal>
+ <goal name="VC shift_left" expl="VC for shift_left" proved="true">
+ <proof prover="0"><result status="valid" time="0.00" steps="0"/></proof>
+ </goal>
+ <goal name="VC ediv_mod" expl="VC for ediv_mod" proved="true">
+ <proof prover="3"><result status="valid" time="0.86"/></proof>
+ </goal>
+ <goal name="VC shift_right" expl="VC for shift_right" proved="true">
+ <proof prover="3"><result status="valid" time="0.09"/></proof>
+ </goal>
+ <goal name="VC isqrt" expl="VC for isqrt" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="VC isqrt.0" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.04"/></proof>
+  </goal>
+  <goal name="VC isqrt.1" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.04"/></proof>
+  </goal>
+  <goal name="VC isqrt.2" expl="loop invariant init" proved="true">
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  </goal>
+  <goal name="VC isqrt.3" expl="loop variant decrease" proved="true">
+  <proof prover="3"><result status="valid" time="0.14"/></proof>
+  </goal>
+  <goal name="VC isqrt.4" expl="loop invariant preservation" proved="true">
+  <proof prover="3"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC isqrt.5" expl="loop invariant preservation" proved="true">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+  <goal name="VC isqrt.6" expl="loop invariant preservation" proved="true">
+  <proof prover="3"><result status="valid" time="0.34"/></proof>
+  </goal>
+  <goal name="VC isqrt.7" expl="assertion" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="VC isqrt.7.0" expl="assertion" proved="true">
+   <proof prover="3"><result status="valid" time="2.25"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.1" expl="assertion" proved="true">
+   <proof prover="0"><result status="valid" time="0.02" steps="18"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.2" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.02" steps="20"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.3" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.02" steps="22"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.4" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="22"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.5" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="25"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.6" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.09" steps="27"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC isqrt.8" expl="assertion" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="VC isqrt.8.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3"><result status="valid" time="0.31"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.1" expl="assertion" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="18"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.2" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.02" steps="21"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.3" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.02" steps="23"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.4" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.28" steps="25"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.5" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.23" steps="27"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.6" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="4.08" steps="137"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.7" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.51" steps="122"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.8" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="31"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.9" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="32"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.10" expl="VC for isqrt" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="33"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC isqrt.9" expl="postcondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.55"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="_B_non_neg" proved="true">
+ <proof prover="0"><result status="valid" time="0.01" steps="32"/></proof>
+ </goal>
+ <goal name="_B_group_homomorphism" proved="true">
+ <proof prover="0"><result status="valid" time="0.01" steps="44"/></proof>
+ </goal>
+ <goal name="_B_inverse" proved="true">
+ <proof prover="0"><result status="valid" time="0.10" steps="337"/></proof>
+ </goal>
+ <goal name="_B_sqrt_mul" proved="true">
+ <proof prover="0"><result status="valid" time="0.47" steps="200"/></proof>
+ </goal>
+ <goal name="_B_spec_pos" proved="true">
+ <transf name="intros" proved="true" arg1="n,H">
+  <goal name="_B_spec_pos.0" proved="true">
+  <transf name="assert" proved="true" arg1="(pow (from_int 4) (from_int n) = from_int (power 4 n))">
+   <goal name="_B_spec_pos.0.0" expl="asserted formula" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="12"/></proof>
+   </goal>
+   <goal name="_B_spec_pos.0.1" proved="true">
+   <proof prover="1"><result status="valid" time="0.03"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="_B_spec_neg_0" proved="true">
+ <proof prover="0"><result status="valid" time="0.01" steps="12"/></proof>
+ </goal>
+ <goal name="_B_spec_neg" proved="true">
+ <proof prover="0"><result status="valid" time="0.04" steps="66"/></proof>
+ </goal>
+ <goal name="pow_mul2_exp" proved="true">
+ <proof prover="0"><result status="valid" time="0.12" steps="60"/></proof>
+ <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+ </goal>
+ <goal name="VC round_z_over_4" expl="VC for round_z_over_4">
+ <proof prover="1" obsolete="true"><result status="highfailure" time="0.04"/></proof>
+ <transf name="split_vc" >
+  <goal name="VC round_z_over_4.0" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC round_z_over_4.1" expl="assertion" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="VC round_z_over_4.1.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="valid" time="0.04" steps="148"/></proof>
+   <proof prover="2"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3"><result status="timeout" time="5.00"/></proof>
+   </goal>
+   <goal name="VC round_z_over_4.1.1" expl="VC for round_z_over_4" proved="true">
+   <proof prover="0" timelimit="1"><result status="valid" time="0.37" steps="409"/></proof>
+   <proof prover="1" obsolete="true"><result status="highfailure" time="0.08"/></proof>
+   <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="1"><result status="timeout" time="1.00"/></proof>
+   <transf name="split_all_full" >
+    <goal name="VC round_z_over_4.1.1.0" expl="VC for round_z_over_4">
+    <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
+    <proof prover="3" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC round_z_over_4.1.2" expl="VC for round_z_over_4" proved="true">
+   <proof prover="0" timelimit="1"><result status="valid" time="0.73" steps="555"/></proof>
+   <proof prover="3" timelimit="1"><result status="timeout" time="1.00"/></proof>
+   </goal>
+   <goal name="VC round_z_over_4.1.1">
+   <proof prover="3" timelimit="1"><result status="valid" time="0.04"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC round_z_over_4.2" expl="precondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="10"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="3"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC round_z_over_4.3" expl="postcondition">
+  <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <transf name="split_vc" >
+   <goal name="VC round_z_over_4.3.0" expl="postcondition">
+   <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3"><result status="timeout" time="5.00"/></proof>
+   </goal>
+   <goal name="VC round_z_over_4.3.1" expl="postcondition" proved="true">
+   <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="10"/></proof>
+   <proof prover="2" obsolete="true"><result status="valid" time="0.02"/></proof>
+   <proof prover="3"><result status="valid" time="0.05"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC compute_round" expl="VC for compute_round">
+ </goal>
+ <goal name="VC compute_add" expl="VC for compute_add">
+ </goal>
+</theory>
+</file>
+</why3session>
