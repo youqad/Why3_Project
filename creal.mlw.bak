@@ -147,7 +147,7 @@ let compute_round (n:int) (ghost z : real) (zp: int)
   ensures { framing z result n } 
   =
   let resu = round_z_over_4 zp in
-  assert {    z <=. (from_int resu +. 1.) *. _B (-n) 
+  assert {    z <. (from_int resu +. 1.) *. _B (-n) 
           by  z <=. (from_int zp +. 2.) *. _B (-(n+1))
                  =  (from_int zp -. 2.) *. _B (-(n+1)) +. _B (-n)
                  =  (from_int zp -. 2.) *. _B (-1) *. _B (-n) +. _B (-n) 
@@ -167,5 +167,54 @@ let compute_add (n: int) (ghost x : real) (xp : int) (ghost y : real) (yp : int)
   compute_round n (x +. y) (xp + yp)
 
 
+let compute_neg (n: int) (ghost x : real) (xp : int)
+  requires { framing x xp n }
+  ensures { framing (-.x) result n }
+  =
+  -xp
 
-  
+let compute_sub (n: int) (ghost x : real) (xp : int) (ghost y : real) (yp : int)
+  requires { framing x xp (n+1) }
+  requires { framing y yp (n+1) }
+  ensures { framing (x-.y) result n }
+  =
+  let yp' = compute_neg (n+1) y yp in
+  let resu = compute_add n x xp (-.y) yp' in
+  assert { framing (-.y) yp' (n+1) };
+  resu
+
+let compute_cst (n: int) (x : int) : int
+  ensures { framing (from_int x) result n } 
+  =
+  if n = 0 then
+    x
+  else 
+    if n < 0 then (
+      let resu = shift_right x (2*(-n)) in
+        assert {  (from_int resu -. 1.) *. _B (-n) <. from_int x
+             by ED.div x (power 4 (-n)) * (power 4 (-n)) - (power 4 (-n)) < x
+             so (resu - 1)*(power 4 (-n)) < x
+             so from_int (resu - 1) *. from_int (power 4 (-n)) <. from_int x
+             so (from_int resu -. 1.) *. pow 4. (from_int (-n)) <. from_int x };
+        assert {  from_int x <. (from_int resu +. 1.) *. _B (-n) 
+             by x =  ED.div x (power 4 (-n)) * (power 4 (-n)) + ED.mod x (power 4 (-n))
+                  <  ED.div x (power 4 (-n)) * (power 4 (-n)) + (power 4 (-n))
+             so x < (resu + 1)*(power 4 (-n))
+             so from_int x <. from_int (resu + 1) *. from_int (power 4 (-n))
+              };
+        shift_right x (2*(-n)))
+    else (
+      let resu = shift_left x (2*n) in
+        assert {  (from_int resu -. 1.) *. _B (- n) <. from_int x 
+             by   from_int x *. pow 4. (from_int n) *. _B (- n) -. _B (-n) <. from_int x
+             so   (from_int x *. pow 4. (from_int n) -. 1.) *. _B (- n) <. from_int x 
+             so   (from_int x *. pow 2. (2. *. from_int n) -. 1.) *. _B (- n) <. from_int x };
+        assert {  (from_int resu +. 1.) *. _B (- n) >. from_int x 
+             by   from_int x <. from_int x *. pow 4. (from_int n) *. _B (- n) +. _B (-n) 
+             so   from_int x <. (from_int x *. pow 4. (from_int n) +. 1.) *. _B (- n)
+             so   pow 4. (from_int n) = pow 2. (2. *. from_int n)
+             &&   from_int x <. (from_int x *. pow 2. (2. *. from_int n) +. 1.) *. _B (- n) };
+        resu)
+      
+      
+      

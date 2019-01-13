@@ -329,34 +329,17 @@
    <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
    <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
-   <goal name="VC compute_cst.5.1" expl="VC for compute_cst" proved="true">
-   <proof prover="3"><result status="valid" time="0.08"/></proof>
-   </goal>
-   <goal name="VC compute_cst.5.2" expl="VC for compute_cst">
+   <goal name="VC compute_cst.5.1" expl="VC for compute_cst">
    <proof prover="0"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1"><result status="highfailure" time="0.06"/></proof>
+   <proof prover="1"><result status="highfailure" time="0.05"/></proof>
    <proof prover="2"><result status="timeout" time="1.00"/></proof>
    <proof prover="3"><result status="timeout" time="1.00"/></proof>
    <proof prover="4"><result status="timeout" time="1.00"/></proof>
    <proof prover="5"><result status="highfailure" time="0.00"/></proof>
    <proof prover="6"><result status="timeout" time="1.00"/></proof>
    </goal>
-   <goal name="VC compute_cst.5.3" expl="VC for compute_cst">
-   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
-   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="3" obsolete="true"><result status="valid" time="0.09"/></proof>
-   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <transf name="inline_goal" >
-    <goal name="VC compute_cst.5.3.0" expl="VC for compute_cst">
-    <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="VC compute_cst.5.4" expl="VC for compute_cst">
-   <proof prover="0" obsolete="true"><result status="valid" time="0.06" steps="117"/></proof>
+   <goal name="VC compute_cst.5.2" expl="VC for compute_cst">
+   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
    <proof prover="1" obsolete="true"><result status="highfailure" time="0.04"/></proof>
    <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
    <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
@@ -364,24 +347,19 @@
    <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
    <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
+   <goal name="VC compute_cst.5.3" expl="VC for compute_cst">
+   </goal>
+   <goal name="VC compute_cst.5.4" expl="VC for compute_cst">
+   </goal>
    <goal name="VC compute_cst.5.5" expl="VC for compute_cst">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1" obsolete="true"><result status="highfailure" time="0.07"/></proof>
-   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
-   <goal name="VC compute_cst.5.6" expl="VC for compute_cst">
-   <proof prover="0" obsolete="true"><result status="valid" time="0.20" steps="206"/></proof>
-   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <goal name="VC compute_cst.5.1">
    </goal>
-   <goal name="VC compute_cst.5.7" expl="VC for compute_cst">
+   <goal name="VC compute_cst.5.0">
    <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1" obsolete="true"><result status="highfailure" time="0.08"/></proof>
+   <proof prover="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
    <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="3"><result status="valid" time="0.11"/></proof>
    <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
    <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
    <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
