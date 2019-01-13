@@ -6,9 +6,11 @@
 <prover id="1" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
 <prover id="2" name="Eprover" version="2.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="CVC4" version="1.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="4" name="Spass" version="3.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="5" name="Vampire" version="4.3.0" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="6" name="Z3" version="4.8.4" timelimit="1" steplimit="0" memlimit="1000"/>
-<file name="../creal.mlw" proved="true">
-<theory name="Top" proved="true">
+<file name="../creal.mlw">
+<theory name="Top">
  <goal name="VC power2" expl="VC for power2" proved="true">
  <proof prover="3" timelimit="5"><result status="valid" time="0.05"/></proof>
  </goal>
@@ -565,8 +567,14 @@
   </goal>
  </transf>
  </goal>
- <goal name="VC compute" expl="VC for compute" proved="true">
- <proof prover="3"><result status="valid" time="0.72"/></proof>
+ <goal name="VC compute" expl="VC for compute">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" timelimit="1"><result status="highfailure" time="0.06"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00"/></proof>
+ <proof prover="3"><result status="timeout" time="1.00"/></proof>
+ <proof prover="4"><result status="timeout" time="1.00"/></proof>
+ <proof prover="5"><result status="highfailure" time="0.00"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00"/></proof>
  </goal>
 </theory>
 </file>

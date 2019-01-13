@@ -565,6 +565,9 @@
   </goal>
  </transf>
  </goal>
+ <goal name="VC compute" expl="VC for compute" proved="true">
+ <proof prover="3"><result status="valid" time="0.72"/></proof>
+ </goal>
 </theory>
 </file>
 </why3session>

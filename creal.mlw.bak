@@ -298,7 +298,7 @@ let lemma sqrt_floor_floor (n:int) : unit
   ()
 
 
-0let compute_sqrt (n: int) (ghost x : real) (xp : int)
+let compute_sqrt (n: int) (ghost x : real) (xp : int)
   requires { 0. <=. x }
   requires { framing x xp (2*n) }
   ensures { framing (sqrt x) result n } 
@@ -339,3 +339,50 @@ let lemma sqrt_floor_floor (n:int) : unit
     
 (**** 4.5 Compute ****)
 (**************)
+
+type term =
+  | Cst int
+  | Add term term
+  | Neg term
+  | Sub term term
+  | Sqrt term
+  
+let rec ghost function interp (t: term) : real = 
+  match t with
+    | Cst n -> from_int n
+    | Add t' t'' -> interp t' +. interp t''
+    | Neg t' -> -.(interp t')
+    | Sub t' t'' -> interp t' -. interp t''
+    | Sqrt t' -> sqrt (interp t')
+  end
+
+inductive wf_term (term) =
+  | wf_cst: 
+      forall n:int. wf_term (Cst n)
+  | wf_add: 
+      forall t t':term. wf_term t -> wf_term t' -> wf_term (Add t t')
+  | wf_neg: 
+      forall t:term. wf_term t -> wf_term (Neg t)
+  | wf_sub: 
+      forall t t':term. wf_term t -> wf_term t' -> wf_term (Sub t t')
+  | wf_sqrt: 
+      forall t:term. interp t >=. 0. -> wf_term t -> wf_term (Sqrt t)
+
+let rec compute (t:term) (n:int) : int
+  requires { wf_term t }
+  ensures { framing (interp t) result n }
+  variant { t }
+  =
+  match t with
+    | Cst x -> compute_cst n x
+    | Add t' t'' -> 
+        let xp = compute t' (n+1) in
+        let yp = compute t'' (n+1) in
+          compute_add n (interp t') xp (interp t'') yp  
+    | Neg t' -> compute_neg n (interp t') (compute t' n)
+    | Sub t' t'' ->
+        let xp = compute t' (n+1) in
+        let yp = compute t'' (n+1) in
+          compute_sub n (interp t') xp (interp t'') yp  
+    | Sqrt t' -> compute_sqrt n (interp t') (compute t' (2*n))
+  end
