@@ -105,6 +105,8 @@ function _B (n:int) : real = pow b (from_int n)
 
 lemma _B_non_neg: forall n:int. _B n >=. 0.
 
+lemma _B_non_neg_strict: forall n:int. n <> 0 -> _B n >. 0.
+
 lemma _B_group_homomorphism: 
   forall n m:int. _B n *. _B m = _B (n+m)
 
@@ -125,6 +127,10 @@ lemma _B_spec_neg:
 
 lemma pow_mul2_exp:
   forall n:int. 0 <= n -> power 2 (2*n) = power 4 n
+  
+  
+(**** IV. ****)
+(**************)
   
 predicate framing (x:real) (p:int) (n:int) =
   (from_int p -. 1.) *. (_B (-n)) <. x <. (from_int p +. 1.) *. (_B (-n))  
@@ -217,6 +223,10 @@ let compute_cst (n: int) (x : int) : int
              &&   from_int x <. (from_int x *. pow 2. (2. *. from_int n) +. 1.) *. _B (- n) };
         resu)
 
+
+(**** 4.4 Square Root ****)
+(**************)
+
 function _sqrt_incr (n:int) : real = inv (sqrt (from_int (n+1)) +. sqrt (from_int n)) 
 
 let lemma _sqrt_incr_spec (n:int) : unit 
@@ -286,5 +296,46 @@ let lemma sqrt_floor_floor (n:int) : unit
     absurd);
   assert { floor (sqrt (from_int n)) <= ceil x <= a };
   ()
-  
 
+
+0let compute_sqrt (n: int) (ghost x : real) (xp : int)
+  requires { 0. <=. x }
+  requires { framing x xp (2*n) }
+  ensures { framing (sqrt x) result n } 
+  =
+  if xp <= 0 then (
+    assert { -. _B (-n) <. 0. <=. sqrt x };
+    assert {  sqrt x <. _B (-n) 
+           by x <. (from_int xp +. 1.) *. _B (-2*n) <=. 1. *. _B (-2*n)
+           so x <=. _B (-2*n) && not x = _B (-2*n)
+           so sqrt x <=. sqrt (_B (-2*n)) && not sqrt x = sqrt (_B (-2*n)) };
+    0)
+  else (
+    assert {  sqrt x <. (from_int (floor (sqrt (from_int xp))) +. 1.) *. _B (-n)
+       by x <=. (from_int xp +. 1.) *. _B (-2*n) 
+          && not x = (from_int xp +. 1.) *. _B (-2*n)
+       so sqrt x <=. sqrt ((from_int xp +. 1.) *. _B (-2*n))
+          && not sqrt x = sqrt ((from_int xp +. 1.) *. _B (-2*n)) 
+          && from_int xp +. 1. >=. 0. && _B (-2*n) >=. 0.
+       so sqrt x <=. sqrt (from_int xp +. 1.) *. sqrt (_B (-2*n))
+          && not sqrt x = sqrt (from_int xp +. 1.) *. sqrt (_B (-2*n))
+       so sqrt x <. sqrt (from_int xp +. 1.) *. _B (-n) 
+          && sqrt (from_int xp +. 1.) <=. from_int (floor (sqrt (from_int xp))) +. 1. };
+    assert {  (from_int (floor (sqrt (from_int xp))) -. 1.) *. _B (-n) <. sqrt x
+       by x >=. (from_int xp -. 1.) *. _B (-2*n)
+          && not x = (from_int xp -. 1.) *. _B (-2*n)
+          && from_int xp -. 1. >=. 0. && _B (-2*n) >=. 0.
+       so x >=. (from_int xp -. 1.) *. _B (-2*n) >=. 0.
+          && not x = (from_int xp -. 1.) *. _B (-2*n)
+       so sqrt x >=. sqrt ((from_int xp -. 1.) *. _B (-2*n))
+          && not sqrt x = sqrt ((from_int xp -. 1.) *. _B (-2*n)) 
+          && from_int xp -. 1. >=. 0. && _B (-2*n) >=. 0.
+       so sqrt x >=. sqrt (from_int xp -. 1.) *. sqrt (_B (-2*n))
+          && not sqrt x = sqrt (from_int xp -. 1.) *. sqrt (_B (-2*n))
+       so sqrt x >. sqrt (from_int xp -. 1.) *. _B (-n) 
+          && sqrt (from_int xp -. 1.) >=. from_int (floor (sqrt (from_int xp))) -. 1. };    
+    isqrt xp)
+
+    
+(**** 4.5 Compute ****)
+(**************)
