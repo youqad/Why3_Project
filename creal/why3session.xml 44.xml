@@ -262,8 +262,8 @@
  <goal name="VC compute_sub" expl="VC for compute_sub" proved="true">
  <proof prover="3"><result status="valid" time="0.09"/></proof>
  </goal>
- <goal name="VC compute_cst" expl="VC for compute_cst">
- <transf name="split_all_full" >
+ <goal name="VC compute_cst" expl="VC for compute_cst" proved="true">
+ <transf name="split_all_full" proved="true" >
   <goal name="VC compute_cst.0" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.08"/></proof>
   </goal>
@@ -312,118 +312,93 @@
   <proof prover="3"><result status="valid" time="0.05"/></proof>
   </goal>
   <goal name="VC compute_cst.5" expl="assertion" proved="true">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
-  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <transf name="split_vc" proved="true" >
    <goal name="VC compute_cst.5.0" expl="VC for compute_cst" proved="true">
    <proof prover="0"><result status="valid" time="0.06" steps="14"/></proof>
-   <proof prover="1" obsolete="true"><result status="highfailure" time="0.04"/></proof>
-   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
-   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
    <goal name="VC compute_cst.5.1" expl="VC for compute_cst" proved="true">
    <proof prover="0"><result status="valid" time="0.01" steps="14"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
    </goal>
-   <goal name="VC compute_cst.5.1">
-   <proof prover="3"><result status="valid" time="0.08"/></proof>
+   <goal name="VC compute_cst.5.2" expl="VC for compute_cst" proved="true">
+   <proof prover="0"><result status="valid" time="0.34" steps="293"/></proof>
    </goal>
-   <goal name="VC compute_cst.5.3">
-   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
-   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="3" obsolete="true"><result status="valid" time="0.09"/></proof>
-   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <transf name="inline_goal" >
-    <goal name="VC compute_cst.5.3.0">
-    <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="VC compute_cst.5.0">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1" obsolete="true"><result status="highfailure" time="0.04"/></proof>
-   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3"><result status="valid" time="0.12"/></proof>
-   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   </goal>
-   <goal name="VC compute_cst.5.2">
-   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1"><result status="highfailure" time="0.06"/></proof>
-   <proof prover="2"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
-   <proof prover="4"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6"><result status="timeout" time="1.00"/></proof>
-   </goal>
-   <goal name="VC compute_cst.5.1">
-   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1"><result status="highfailure" time="0.07"/></proof>
-   <proof prover="2"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
-   <proof prover="4"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6"><result status="timeout" time="1.00"/></proof>
-   </goal>
-   <goal name="VC compute_cst.5.2">
-   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1"><result status="highfailure" time="0.08"/></proof>
-   <proof prover="2"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
-   <proof prover="4"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6"><result status="timeout" time="1.00"/></proof>
+   <goal name="VC compute_cst.5.3" expl="VC for compute_cst" proved="true">
+   <proof prover="2"><result status="valid" time="0.38"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="VC compute_cst.6" expl="assertion" proved="true">
-  <proof prover="0"><result status="valid" time="0.01" steps="16"/></proof>
-  <proof prover="3"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="VC compute_cst.6.0" expl="VC for compute_cst" proved="true">
+   <proof prover="0"><result status="valid" time="0.02" steps="16"/></proof>
+   </goal>
+   <goal name="VC compute_cst.6.1" expl="VC for compute_cst" proved="true">
+   <proof prover="3"><result status="valid" time="0.04"/></proof>
+   </goal>
+   <goal name="VC compute_cst.6.2" expl="VC for compute_cst" proved="true">
+   <proof prover="0"><result status="valid" time="0.02" steps="19"/></proof>
+   </goal>
+   <goal name="VC compute_cst.6.3" expl="VC for compute_cst" proved="true">
+   <proof prover="0"><result status="valid" time="0.01" steps="19"/></proof>
+   </goal>
+   <goal name="VC compute_cst.6.4" expl="VC for compute_cst" proved="true">
+   <proof prover="2"><result status="valid" time="0.43"/></proof>
+   </goal>
+  </transf>
   </goal>
   <goal name="VC compute_cst.7" expl="postcondition" proved="true">
   <proof prover="0"><result status="valid" time="0.05" steps="110"/></proof>
-  <proof prover="3"><result status="timeout" time="1.00"/></proof>
   </goal>
   <goal name="VC compute_cst.8" expl="postcondition" proved="true">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
-  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="3"><result status="valid" time="0.08"/></proof>
-  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
   </goal>
-  <goal name="VC compute_cst.9" expl="postcondition">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1" obsolete="true"><result status="highfailure" time="0.08"/></proof>
-  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <goal name="VC compute_cst.9" expl="postcondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
   </goal>
-  <goal name="VC compute_cst.7">
+ </transf>
+ </goal>
+ <goal name="VC _sqrt_incr_spec_0" expl="VC for _sqrt_incr_spec_0">
+ <transf name="split_vc" >
+  <goal name="VC _sqrt_incr_spec_0.0" expl="assertion">
   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1"><result status="highfailure" time="0.05"/></proof>
+  <proof prover="1"><result status="highfailure" time="0.03"/></proof>
   <proof prover="2"><result status="timeout" time="1.00"/></proof>
   <proof prover="3"><result status="timeout" time="1.00"/></proof>
   <proof prover="4"><result status="timeout" time="1.00"/></proof>
   <proof prover="5"><result status="highfailure" time="0.00"/></proof>
   <proof prover="6"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_vc" >
+   <goal name="VC _sqrt_incr_spec_0.0.0" expl="assertion">
+   <proof prover="0"><result status="timeout" time="1.00"/></proof>
+   <proof prover="1"><result status="highfailure" time="0.03"/></proof>
+   <proof prover="2"><result status="timeout" time="1.00"/></proof>
+   <proof prover="3"><result status="timeout" time="1.00"/></proof>
+   <proof prover="4"><result status="timeout" time="1.00"/></proof>
+   <proof prover="5"><result status="highfailure" time="0.00"/></proof>
+   <proof prover="6"><result status="timeout" time="1.00"/></proof>
+   </goal>
+   <goal name="VC _sqrt_incr_spec_0.0.1" expl="assertion">
+   </goal>
+   <goal name="VC _sqrt_incr_spec_0.0.2" expl="assertion">
+   </goal>
+   <goal name="VC _sqrt_incr_spec_0.0.3" expl="VC for _sqrt_incr_spec_0">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC _sqrt_incr_spec_0.1" expl="postcondition">
   </goal>
  </transf>
+ </goal>
+ <goal name="_sqrt_incr_spec">
+ <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" obsolete="true"><result status="highfailure" time="0.03"/></proof>
+ <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
+ <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ </goal>
+ <goal name="_sqrt_incr_bounds">
  </goal>
 </theory>
 </file>

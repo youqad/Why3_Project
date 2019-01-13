@@ -3,7 +3,7 @@
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="5">
 <prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="1" steplimit="0" memlimit="1000"/>
-<prover id="1" name="CVC3" version="2.4.1" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
 <prover id="2" name="Eprover" version="2.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="CVC4" version="1.6" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="4" name="Spass" version="3.7" timelimit="1" steplimit="0" memlimit="1000"/>
@@ -135,7 +135,7 @@
    <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="12"/></proof>
    </goal>
    <goal name="_B_spec_pos.0.1" proved="true">
-   <proof prover="1" timelimit="5"><result status="valid" time="0.03"/></proof>
+   <proof prover="1"><result status="valid" time="0.03"/></proof>
    </goal>
   </transf>
   </goal>
@@ -357,30 +357,51 @@
   </goal>
  </transf>
  </goal>
- <goal name="VC _sqrt_incr_spec" expl="VC for _sqrt_incr_spec" proved="true">
- <proof prover="0"><result status="valid" time="0.15" steps="333"/></proof>
- </goal>
- <goal name="VC _sqrt_incr_bounds" expl="VC for _sqrt_incr_bounds">
+ <goal name="_sqrt_incr_spec_0">
  <proof prover="0"><result status="timeout" time="1.00"/></proof>
- <proof prover="1"><result status="highfailure" time="0.03"/></proof>
+ <proof prover="1" timelimit="1"><result status="highfailure" time="0.03"/></proof>
  <proof prover="2"><result status="timeout" time="1.00"/></proof>
  <proof prover="3"><result status="timeout" time="1.00"/></proof>
  <proof prover="4"><result status="timeout" time="1.00"/></proof>
  <proof prover="5"><result status="highfailure" time="0.00"/></proof>
- <proof prover="6"><result status="highfailure" time="0.74"/></proof>
- <transf name="split_vc" >
-  <goal name="VC _sqrt_incr_bounds.0" expl="assertion">
-  <proof prover="0"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1"><result status="highfailure" time="0.03"/></proof>
-  <proof prover="2"><result status="timeout" time="1.00"/></proof>
-  <proof prover="3"><result status="timeout" time="1.00"/></proof>
-  <proof prover="4"><result status="timeout" time="1.00"/></proof>
-  <proof prover="5"><result status="highfailure" time="0.00"/></proof>
-  <proof prover="6"><result status="timeout" time="1.00"/></proof>
-  </goal>
-  <goal name="VC _sqrt_incr_bounds.1" expl="postcondition">
+ <proof prover="6"><result status="timeout" time="1.00"/></proof>
+ <transf name="split_all_full" >
+  <goal name="_sqrt_incr_spec_0.0">
+  <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+  <proof prover="1" memlimit="2000"><result status="highfailure" time="0.04"/></proof>
+  <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+  <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+  <proof prover="4" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+  <proof prover="5" timelimit="5" memlimit="2000"><result status="highfailure" time="0.00"/></proof>
+  <proof prover="6" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+  <transf name="introduce_premises" >
+   <goal name="_sqrt_incr_spec_0.0.0">
+   <transf name="inline_goal" >
+    <goal name="_sqrt_incr_spec_0.0.0.0">
+    <proof prover="0" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="1" timelimit="30" memlimit="4000"><result status="highfailure" time="0.03"/></proof>
+    <proof prover="2" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="4" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="5" timelimit="30" memlimit="4000"><result status="highfailure" time="0.00"/></proof>
+    <proof prover="6" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
   </goal>
  </transf>
+ </goal>
+ <goal name="_sqrt_incr_spec">
+ <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" timelimit="1" obsolete="true"><result status="highfailure" time="0.03"/></proof>
+ <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
+ <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ </goal>
+ <goal name="_sqrt_incr_bounds">
  </goal>
 </theory>
 </file>

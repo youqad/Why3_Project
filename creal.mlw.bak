@@ -212,9 +212,31 @@ let compute_cst (n: int) (x : int) : int
         assert {  (from_int resu +. 1.) *. _B (- n) >. from_int x 
              by   from_int x <. from_int x *. pow 4. (from_int n) *. _B (- n) +. _B (-n) 
              so   from_int x <. (from_int x *. pow 4. (from_int n) +. 1.) *. _B (- n)
-             so   pow 4. (from_int n) = pow 2. (2. *. from_int n)
+             so   pow (2. *. 2.) (from_int n) = pow 2. (2. *. from_int n)
              &&   from_int x <. (from_int x *. pow 2. (2. *. from_int n) +. 1.) *. _B (- n) };
         resu)
-      
-      
-      
+
+function _sqrt_incr (n:int) : real = inv (sqrt (from_int (n+1)) +. sqrt (from_int n)) 
+
+let lemma _sqrt_incr_spec (n:int) : unit 
+  requires { n >= 0 }
+  ensures { sqrt (from_int (n+1)) = sqrt (from_int n) +. _sqrt_incr n }
+  =
+  let prod = (sqrt (from_int (n+1)) -. sqrt (from_int n))*.(sqrt (from_int (n+1)) +. sqrt (from_int n)) in 
+  assert {  prod = 1. 
+        by  prod = (sqrt (from_int (n+1)) -. sqrt (from_int n)) *. sqrt (from_int (n+1)) +. 
+                   (sqrt (from_int (n+1)) -. sqrt (from_int n)) *. sqrt (from_int n)
+                 = sqrt (from_int (n+1)) *. sqrt (from_int (n+1)) -. sqrt (from_int n) *. sqrt (from_int (n+1)) +. 
+                   (sqrt (from_int (n+1)) -. sqrt (from_int n)) *. sqrt (from_int n) 
+                 = sqrt (from_int (n+1)) *. sqrt (from_int (n+1)) -. sqrt (from_int n) *. sqrt (from_int (n+1)) 
+                 +. sqrt (from_int (n+1)) *. sqrt (from_int n) -. sqrt (from_int n) *. sqrt (from_int n) 
+                 = from_int (n+1) -. from_int n
+                 = 1. 
+        so  sqrt (from_int (n+1)) = sqrt (from_int n) +. _sqrt_incr n }; ()
+
+let lemma _sqrt_incr_bounds (n:int) : unit 
+  requires { n >= 0 }
+  ensures { 0. <. _sqrt_incr n <=. 1. }
+  =
+  let prod = (sqrt (from_int (n+1)) +. sqrt (from_int n)) in 
+  assert {  1. <=. 1. *. prod && prod >. 0. }; ()
