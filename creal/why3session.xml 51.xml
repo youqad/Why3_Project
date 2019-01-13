@@ -401,22 +401,22 @@
   <proof prover="3"><result status="valid" time="0.06"/></proof>
   </goal>
   <goal name="VC sqrt_ceil_floor.9" expl="postcondition">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1" obsolete="true"><result status="highfailure" time="0.03"/></proof>
-  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="0"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1"><result status="highfailure" time="0.03"/></proof>
+  <proof prover="2"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5"><result status="highfailure" time="0.00"/></proof>
+  <proof prover="6"><result status="timeout" time="1.00"/></proof>
   <transf name="clear_but" arg1="H">
    <goal name="VC sqrt_ceil_floor.9.0" expl="postcondition">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1" obsolete="true"><result status="highfailure" time="0.03"/></proof>
-   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="0"><result status="timeout" time="1.00"/></proof>
+   <proof prover="1"><result status="highfailure" time="0.03"/></proof>
+   <proof prover="2"><result status="timeout" time="1.00"/></proof>
+   <proof prover="3"><result status="timeout" time="1.00"/></proof>
+   <proof prover="4"><result status="timeout" time="1.00"/></proof>
+   <proof prover="5"><result status="highfailure" time="0.00"/></proof>
+   <proof prover="6"><result status="timeout" time="1.00"/></proof>
    </goal>
   </transf>
   </goal>

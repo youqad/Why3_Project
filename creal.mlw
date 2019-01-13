@@ -57,6 +57,7 @@ use real.Square
 use real.FromInt
 use real.Truncate
 
+
 let function isqrt (n:int) : int
   requires { 0 <= n }
   ensures { result = floor (sqrt (from_int n)) }
@@ -241,3 +242,50 @@ let lemma _sqrt_incr_bounds (n:int) : unit
   let prod = (sqrt (from_int (n+1)) +. sqrt (from_int n)) in 
   assert {  1. <=. 1. *. prod && prod >. 0. }; ()
   
+let lemma sqrt_ceil_floor (n:int) : unit 
+  requires { n >= 0 }
+  ensures { ceil (sqrt (from_int (n+1))) - 1 <= floor (sqrt (from_int n)) }
+  =
+  let x = sqrt (from_int (n+1)) in
+  let a = floor (sqrt (from_int n)) + 1 in 
+  assert { ceil (sqrt (from_int (n+1))) - 1 < ceil x };
+  assert {  ceil x <= a + 1
+        by  x  = sqrt (from_int n) +. _sqrt_incr n 
+              <=. from_int a +. _sqrt_incr n
+              <=. from_int a +. 1.
+        so  ceil x <= ceil (from_int (a + 1)) };
+  if ceil x = a+1 then (
+    assert {  n < a*a < n+1
+           by sqrt (from_int n) <. from_int a <. sqrt (from_int (n+1))
+           so from_int n = (sqrt (from_int n))*.(sqrt (from_int n)) 
+                               <. (from_int a) *. (from_int a)
+                               <. (sqrt (from_int (n+1))) *. (sqrt (from_int (n+1))) 
+                               =  from_int (n+1) };
+    absurd);
+  assert { ceil x <= a };
+  ()
+
+let lemma sqrt_floor_floor (n:int) : unit 
+  requires { n >= 1 }
+  ensures { floor (sqrt (from_int n)) <= floor (sqrt (from_int (n - 1))) + 1 }
+  =
+  let x = sqrt (from_int n) in
+  let a = floor (sqrt (from_int (n - 1))) + 1 in 
+  assert {  ceil x <= a + 1
+        by  x  = sqrt (from_int (n - 1)) +. _sqrt_incr (n - 1) 
+              <=. from_int a +. _sqrt_incr (n-1)
+              <=. from_int a +. 1.
+        so  ceil x <= ceil (from_int (a + 1)) };
+  if ceil x = a+1 then (
+    assert {  n-1 < a*a < n
+           by sqrt (from_int (n - 1)) <. from_int a <. sqrt (from_int n)
+           so from_int (n-1) = (sqrt (from_int (n-1)))*.(sqrt (from_int (n-1))) 
+                         <.  (from_int a) *. (from_int a)
+                         <. (sqrt (from_int n)) *. (sqrt (from_int n)) 
+                         = sqr (from_int n) };
+    absurd);
+  assert { floor (sqrt (from_int n)) <= ceil x <= a };
+  ()
+
+
+
