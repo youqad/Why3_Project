@@ -6,6 +6,8 @@
 <prover id="1" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
 <prover id="2" name="Eprover" version="2.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="CVC4" version="1.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="4" name="Spass" version="3.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="5" name="Vampire" version="4.3.0" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="6" name="Z3" version="4.8.4" timelimit="1" steplimit="0" memlimit="1000"/>
 <file name="../creal.mlw" proved="true">
 <theory name="Top" proved="true">
@@ -567,6 +569,80 @@
  </goal>
  <goal name="VC compute" expl="VC for compute" proved="true">
  <proof prover="3"><result status="valid" time="0.72"/></proof>
+ </goal>
+ <goal name="VC euclid_uniq" expl="VC for euclid_uniq" proved="true">
+ <proof prover="3"><result status="valid" time="0.08"/></proof>
+ </goal>
+ <goal name="VC dividend_incr" expl="VC for dividend_incr" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="VC dividend_incr.0" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.1" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.2" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="0.02" steps="65"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.3" expl="assertion" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="VC dividend_incr.3.0" expl="assertion" proved="true">
+   <proof prover="0"><result status="valid" time="0.02" steps="28"/></proof>
+   </goal>
+   <goal name="VC dividend_incr.3.1" expl="assertion" proved="true">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+   <goal name="VC dividend_incr.3.2" expl="assertion" proved="true">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+   <goal name="VC dividend_incr.3.3" expl="VC for dividend_incr" proved="true">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC dividend_incr.4" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="0.02" steps="66"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.5" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="0.05" steps="138"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.6" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.03" steps="86"/></proof>
+  <proof prover="1" timelimit="1" obsolete="true"><result status="highfailure" time="0.09"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC dividend_decr" expl="VC for dividend_decr" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="VC dividend_decr.0" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.1" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.2" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="0.03" steps="74"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.3" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="0.06" steps="150"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.4" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="0.03" steps="73"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.5" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="0.03" steps="86"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.6" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.07" steps="128"/></proof>
+  </goal>
+ </transf>
  </goal>
 </theory>
 </file>

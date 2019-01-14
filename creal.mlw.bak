@@ -347,7 +347,7 @@ type term =
   | Sub term term
   | Sqrt term
   
-let rec ghost function interp (t: term) : real = 
+function interp (t: term) : real = 
   match t with
     | Cst n -> from_int n
     | Add t' t'' -> interp t' +. interp t''
@@ -386,3 +386,80 @@ let rec compute (t:term) (n:int) : int
           compute_sub n (interp t') xp (interp t'') yp  
     | Sqrt t' -> compute_sqrt n (interp t') (compute t' (2*n))
   end
+
+    
+(**** V. Division ****)
+(**************)
+
+
+let lemma euclid_uniq (x y q : int) : unit
+  requires { y > 0 }
+  requires { q * y <= x < q * y + y }
+  ensures { ED.div x y = q }
+  =
+  ()
+
+  
+let lemma dividend_incr (a b: int): unit
+  requires { 0 < a }
+  requires { 0 < b }
+  requires { ED.div a b < b }
+  ensures { 
+    if ED.mod a b < ED.div a b then
+      ED.div a (b+1) = ED.div a b - 1
+    else 
+      ED.div a (b+1) = ED.div a b }
+  = 
+  let d, r =  ediv_mod a b in
+  let d'', r'' = ediv_mod a (b+1) in
+  if r < d then (
+    assert {  (d-1)*(b+1) <= a
+          by  d <= r + b + 1
+          so  - b + d - 1 <= r
+          so  (d-1)*(b+1) = (d-1)* b + (d-1)
+                          = d*b - b + d - 1
+                          <= d*b + r = a };
+    assert {  a < d*(b+1)
+           by a = d*b + r < d*b + d = d*(b+1) } )
+  else (
+    assert {  d*(b+1) <= a
+          by  d*(b+1) = d*b + d < d*b + r = a };
+    assert {  a < (d+1)*(b+1)
+           by r < d <= d + b + 1
+           so a = d*b + r < d*b + d + b + 1 
+                          = d*(b+1) + b + 1
+                          = (d+1)*(b+1) } );
+  ()
+      
+let lemma dividend_decr (a b: int): unit
+  requires { 0 < a }
+  requires { 1 < b }
+  requires { ED.div a b < b-1 }
+  ensures {
+    if b - 1 - ED.div a b <= ED.mod a b then
+      ED.div a (b-1) = ED.div a b + 1
+    else 
+      ED.div a (b-1) = ED.div a b }
+  = 
+  let d, r =  ediv_mod a b in
+  let d', r' = ediv_mod a (b-1) in
+  if b - 1 - d <= r then (
+    assert {  (d+1)*(b-1) <= a
+          by  (d+1)*(b-1) = (d+1)*b - (d+1)
+                          = d*b + b - d - 1
+                          <= d*b + r = a };
+    assert {  a < (d+2)*(b-1)
+           by b - d - 2 >= 0
+           so b + b - d - 2 >= b
+           by a = d*b + r <  d*b + b 
+                          <= d*b + b + b - d - 2
+                           = d*b + 2*b - (d + 2)
+                           = (d+2)*b - (d + 2)
+                           = (d+2)*(b-1) } )
+  else (
+    assert {  d*(b-1) <= a };
+    assert {  a < (d+1)*(b-1)
+           by a = d*b + r < d*b + b - 1 - d
+                          = (d+1)*b - (d + 1)
+                          = (d+1)*(b-1) } );
+  ()
