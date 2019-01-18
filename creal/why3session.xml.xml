@@ -1107,52 +1107,141 @@
   <goal name="VC inv_simple_simple.12" expl="assertion" proved="true">
   <proof prover="0"><result status="valid" time="0.04" steps="56"/></proof>
   </goal>
-  <goal name="VC inv_simple_simple.13" expl="assertion">
+  <goal name="VC inv_simple_simple.13" expl="assertion" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="VC inv_simple_simple.13.0" expl="assertion" proved="true">
+   <proof prover="3"><result status="valid" time="0.41"/></proof>
+   </goal>
+   <goal name="VC inv_simple_simple.13.1" expl="assertion" proved="true">
+   <proof prover="0"><result status="valid" time="0.09" steps="236"/></proof>
+   </goal>
+   <goal name="VC inv_simple_simple.13.2" expl="assertion" proved="true">
+   <transf name="split_all_full" proved="true" >
+    <goal name="VC inv_simple_simple.13.2.0" expl="assertion" proved="true">
+    <proof prover="3"><result status="valid" time="0.10"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC inv_simple_simple.13.3" expl="VC for inv_simple_simple" proved="true">
+   <proof prover="0"><result status="valid" time="0.12" steps="244"/></proof>
+   </goal>
+   <goal name="VC inv_simple_simple.13.4" expl="VC for inv_simple_simple" proved="true">
+   <transf name="clear_but" proved="true" arg1="H,H2">
+    <goal name="VC inv_simple_simple.13.4.0" expl="VC for inv_simple_simple" proved="true">
+    <transf name="split_all_full" proved="true" >
+     <goal name="VC inv_simple_simple.13.4.0.0" expl="VC for inv_simple_simple" proved="true">
+     <proof prover="0" timelimit="10" memlimit="4000"><result status="valid" time="8.50" steps="2181"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC inv_simple_simple.14" expl="assertion" proved="true">
+  <transf name="clear_but" proved="true" arg1="H,H4,H11,H12">
+   <goal name="VC inv_simple_simple.14.0" expl="assertion" proved="true">
+   <proof prover="6"><result status="valid" time="0.03"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC inv_simple_simple.15" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="0.04" steps="56"/></proof>
+  </goal>
+  <goal name="VC inv_simple_simple.16" expl="assertion">
   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1"><result status="highfailure" time="0.04"/></proof>
+  <proof prover="1"><result status="highfailure" time="0.05"/></proof>
   <proof prover="2"><result status="timeout" time="1.00"/></proof>
   <proof prover="3"><result status="timeout" time="1.00"/></proof>
   <proof prover="4"><result status="timeout" time="1.00"/></proof>
   <proof prover="5"><result status="highfailure" time="0.00"/></proof>
   <proof prover="6"><result status="timeout" time="1.00"/></proof>
   <transf name="split_vc" >
-   <goal name="VC inv_simple_simple.13.0" expl="assertion" proved="true">
-   <proof prover="0"><result status="valid" time="0.09" steps="234"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
+   <goal name="VC inv_simple_simple.16.0" expl="assertion" proved="true">
+   <proof prover="3"><result status="valid" time="0.42"/></proof>
    </goal>
-   <goal name="VC inv_simple_simple.13.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.10"/></proof>
+   <goal name="VC inv_simple_simple.16.1" expl="assertion" proved="true">
+   <proof prover="3"><result status="valid" time="0.15"/></proof>
    </goal>
-   <goal name="VC inv_simple_simple.13.2" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.41"/></proof>
+   <goal name="VC inv_simple_simple.16.2" expl="assertion" proved="true">
+   <proof prover="3"><result status="valid" time="0.59"/></proof>
    </goal>
-   <goal name="VC inv_simple_simple.13.3" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="0"><result status="valid" time="0.11" steps="244"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.13.4" expl="VC for inv_simple_simple">
+   <goal name="VC inv_simple_simple.16.3" expl="VC for inv_simple_simple">
    <proof prover="0"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1"><result status="highfailure" time="0.04"/></proof>
+   <proof prover="1"><result status="highfailure" time="0.05"/></proof>
    <proof prover="2"><result status="timeout" time="1.00"/></proof>
    <proof prover="3"><result status="timeout" time="1.00"/></proof>
    <proof prover="4"><result status="timeout" time="1.00"/></proof>
    <proof prover="5"><result status="highfailure" time="0.00"/></proof>
    <proof prover="6"><result status="timeout" time="1.00"/></proof>
-   <transf name="split_all_full" >
-    <goal name="VC inv_simple_simple.13.4.0" expl="VC for inv_simple_simple">
-    <proof prover="0" timelimit="10" memlimit="4000"><undone/></proof>
-    <proof prover="1"><result status="highfailure" time="0.05"/></proof>
+   <transf name="clear_but" arg1="H1,H2">
+    <goal name="VC inv_simple_simple.16.3.0" expl="VC for inv_simple_simple">
+    <proof prover="0"><result status="timeout" time="1.00"/></proof>
+    <proof prover="1"><result status="highfailure" time="0.03"/></proof>
     <proof prover="2"><result status="timeout" time="1.00"/></proof>
-    <proof prover="3" timelimit="10" memlimit="4000"><result status="timeout" time="10.00"/></proof>
+    <proof prover="3"><result status="timeout" time="1.00"/></proof>
     <proof prover="4"><result status="timeout" time="1.00"/></proof>
     <proof prover="5"><result status="highfailure" time="0.00"/></proof>
     <proof prover="6"><result status="timeout" time="1.00"/></proof>
+    <transf name="split_all_full" >
+     <goal name="VC inv_simple_simple.16.3.0.0" expl="VC for inv_simple_simple">
+     <proof prover="0" timelimit="10" memlimit="4000"><result status="timeout" time="10.00"/></proof>
+     <proof prover="1" timelimit="10" memlimit="4000"><result status="highfailure" time="0.04"/></proof>
+     <proof prover="2" timelimit="10" memlimit="4000"><result status="timeout" time="10.00"/></proof>
+     <proof prover="3" timelimit="10" memlimit="4000"><result status="timeout" time="10.00"/></proof>
+     <proof prover="4" timelimit="10" memlimit="4000"><result status="timeout" time="10.00"/></proof>
+     <proof prover="5" timelimit="10" memlimit="4000"><result status="highfailure" time="0.00"/></proof>
+     <proof prover="6" timelimit="10" memlimit="4000"><result status="timeout" time="10.00"/></proof>
+     </goal>
+    </transf>
     </goal>
    </transf>
    </goal>
+   <goal name="VC inv_simple_simple.16.4" expl="VC for inv_simple_simple">
+   </goal>
+   <goal name="VC inv_simple_simple.16.5" expl="VC for inv_simple_simple">
+   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="1" obsolete="true"><result status="highfailure" time="0.04"/></proof>
+   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
+   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <transf name="clear_but" arg1="H1,H2">
+    <goal name="VC inv_simple_simple.16.5.0" expl="VC for inv_simple_simple">
+    <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+    <proof prover="1" obsolete="true"><result status="highfailure" time="0.07"/></proof>
+    <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+    <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+    <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+    <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
+    <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+    <transf name="split_all_full" >
+     <goal name="VC inv_simple_simple.16.5.0.0" expl="VC for inv_simple_simple">
+     <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+     <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.04"/></proof>
+     <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+     <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+     <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+     <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.00"/></proof>
+     <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+     <transf name="inline_goal" >
+      <goal name="VC inv_simple_simple.16.5.0.0.0" expl="VC for inv_simple_simple">
+      <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+      <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+      <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC inv_simple_simple.16.6" expl="VC for inv_simple_simple">
+   </goal>
   </transf>
   </goal>
-  <goal name="VC inv_simple_simple.14" expl="postcondition">
+  <goal name="VC inv_simple_simple.17" expl="postcondition">
   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
@@ -1161,27 +1250,25 @@
   <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <transf name="split_vc" >
-   <goal name="VC inv_simple_simple.14.0" expl="postcondition">
-   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1" obsolete="true"><result status="highfailure" time="0.04"/></proof>
-   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <goal name="VC inv_simple_simple.17.0" expl="postcondition">
    <transf name="split_all_full" >
-    <goal name="VC inv_simple_simple.14.0.0" expl="postcondition">
-    <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
-    <proof prover="1" timelimit="10" memlimit="4000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
-    <proof prover="2" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
-    <proof prover="3" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
-    <proof prover="4" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
-    <proof prover="5" timelimit="10" memlimit="4000" obsolete="true"><result status="highfailure" time="0.00"/></proof>
-    <proof prover="6" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
+    <goal name="VC inv_simple_simple.17.0.0" expl="postcondition">
+    <transf name="inline_goal" >
+     <goal name="VC inv_simple_simple.17.0.0.0" expl="postcondition">
+     <transf name="split_all_full" >
+      <goal name="VC inv_simple_simple.17.0.0.0.0" expl="VC for inv_simple_simple">
+      <proof prover="0" obsolete="true"><result status="valid" time="0.09" steps="64"/></proof>
+      </goal>
+      <goal name="VC inv_simple_simple.17.0.0.0.1" expl="VC for inv_simple_simple">
+      <proof prover="0" obsolete="true"><result status="valid" time="0.09" steps="64"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
     </goal>
    </transf>
    </goal>
-   <goal name="VC inv_simple_simple.14.1" expl="postcondition">
+   <goal name="VC inv_simple_simple.17.1" expl="postcondition">
    </goal>
   </transf>
   </goal>

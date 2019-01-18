@@ -529,7 +529,6 @@ let lemma inv_framing (x: real) (p k: int) : unit
              && _B k *. inv (from_int p +. 1.) = inv (from_int p +. 1.) *. _B k <. inv x }
   =
   ()
-
 let inv_simple_simple (ghost x:real) (p:int) (n:int)
   requires { framing x p (n+1) }
   requires { 0 <= n }
@@ -637,11 +636,17 @@ let inv_simple_simple (ghost x:real) (p:int) (n:int)
               && 0 < 4*p };
     assert { d' = d };
     assert {  (from_int d -. 1.) *. inv (_B n) <. (inv x *. _B n) *. inv (_B n) <. (from_int d +. 1.) *. inv (_B n)
-           by from_int d -. 1. <. inv x *. _B n  <. from_int d +. 1. 
-           && 0. <. inv (_B n) };
+          by  0. <. inv (_B n)
+              && from_int d -. 1. <. inv x *. _B n  <. from_int d +. 1. };
     d)
-  else 
-    d+1
+  else (
+    assert {  r >= d };
+    assert { d'' = d };
+    assert {  (from_int (d + 1) -. 1.) *. inv (_B n) <. (inv x *. _B n) *. inv (_B n) <. (from_int (d + 1) +. 1.) *. inv (_B n)
+           by 0. <. inv (_B n)
+              && from_int d <. inv x *. _B n  <. from_int (d + 1) +. 1. = from_int d +. 2.
+           so (from_int d) *. inv (_B n) <. (inv x *. _B n) *. inv (_B n)  <. (from_int d +. 2.) *. inv (_B n) };
+    d+1)
     
 let inv_simple (ghost x) p m n
   requires { 0 <= m }
