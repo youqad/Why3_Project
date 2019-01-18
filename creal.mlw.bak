@@ -561,7 +561,7 @@ let inv_simple_simple (ghost x:real) (p:int) (n:int)
                                     <=. ((from_int p) /. 4.) *. from_int p };
   let ghost d', ghost r' = ediv_mod (power 4 (n+k)) (p-1) in
   let ghost d'', ghost r'' = ediv_mod (power 4 (n+k)) (p+1) in
-  assert {  from_int d'' <. _B n /. x <. from_int d' +. 1.
+  assert {  from_int d'' <. inv x *. _B n  <. from_int d' +. 1.
          by _B k/.(from_int p +. 1.) <. inv x <. _B k/.(from_int p -. 1.) 
             && _B n >. 0.
          so  _B (n+k)/.(from_int p +. 1.) = _B k *. _B n /.(from_int p +. 1.)
@@ -576,40 +576,69 @@ let inv_simple_simple (ghost x:real) (p:int) (n:int)
          so from_int (d'' * (p+1) + r'') /.(from_int p +. 1.) <. inv x *. _B n
                                                               <. from_int (d' * (p-1) + r') /.(from_int p -. 1.)
             && d'' * (p+1) <= d'' * (p+1) + r''
-         so from_int (d'' * (p+1) + r'') /. (from_int (p +1)) <. _B n *. inv x = inv x *. _B n 
+         so from_int (d'' * (p+1) + r'') /. (from_int (p +1)) <. inv x *. _B n 
                                                               <. from_int (d' * (p-1) + r') /. (from_int (p - 1))
             && from_int (d'' * (p+1)) <=. from_int (d'' * (p+1) + r'')
             && 0. <=. inv (from_int (p + 1)) 
          so from_int (d'' * (p+1)) *. inv (from_int (p +1)) <=. from_int (d'' * (p+1) + r'') *. inv (from_int (p +1))
                                                              = from_int (d'' * (p+1) + r'') /. (from_int (p +1))
-                                                            <. _B n /. x 
+                                                            <. inv x *. _B n 
                                                             <. from_int d' *. from_int (p-1) /. (from_int (p - 1)) +.  from_int r' /. (from_int (p - 1))
             && from_int r' <=. from_int (p - 1) && 0. <. from_int (p - 1)                               
          so from_int (d'') *. from_int (p+1) *. inv (from_int (p +1)) = from_int (d'' * (p+1)) *. inv (from_int (p +1))  
-                                                            <. _B n /. x 
+                                                            <. inv x *. _B n 
                                                             <. from_int d' *. from_int (p-1) /. (from_int (p - 1)) +.  from_int r' /. (from_int (p - 1))
             && from_int r' /. (from_int (p - 1)) = from_int r' *. inv (from_int (p - 1)) <=. from_int (p - 1) *. inv (from_int (p - 1)) = 1.                                              
          };
   let d,r = ediv_mod (power 4 (n+k)) p in
-  assert {  d' <= d + 1
-        by  p - 1 - d <= r -> d' = d + 1 
-            && p - 1 - d > r -> d' = d };  
-  assert { d - 1 <= d'' };
   assert {  from_int d <=. (from_int p -. 1.) /. 2. 
-        by  from_int p <=. 2. *. (from_int p -. 1.)
-        so  from_int p /. 4. <=. 2. *. (from_int p -. 1.) /. 4. 
-        so  from_int d *. from_int p = from_int (power 4 (n+k)) -. from_int r  
-                                    <=. from_int (power 4 (n+k)) 
-                                    <=. sqr (from_int p) /. 4. = from_int p /. 4. *. from_int p 
-                                    <=.  (from_int p -. 1.) /. 2. *. from_int p
-            && 0. <. inv (from_int p)
-        so  from_int d *. (from_int p *. inv (from_int p)) = from_int d *. from_int p *. inv (from_int p) 
-                                                          <=. (from_int p -. 1.) /. 2. *. from_int p *. inv (from_int p) 
-                                                           = (from_int p -. 1.) /. 2. *. (from_int p *. inv (from_int p))
-            && from_int p *. inv (from_int p) = 1. };
+      by  from_int p <=. 2. *. (from_int p -. 1.)
+      so  from_int p /. 4. <=. 2. *. (from_int p -. 1.) /. 4. 
+      so  from_int d *. from_int p = from_int (power 4 (n+k)) -. from_int r  
+                                  <=. from_int (power 4 (n+k)) 
+                                  <=. sqr (from_int p) /. 4. = from_int p /. 4. *. from_int p 
+                                  <=.  (from_int p -. 1.) /. 2. *. from_int p
+          && 0. <. inv (from_int p)
+      so  from_int d *. (from_int p *. inv (from_int p)) = from_int d *. from_int p *. inv (from_int p) 
+                                                        <=. (from_int p -. 1.) /. 2. *. from_int p *. inv (from_int p) 
+                                                         = (from_int p -. 1.) /. 2. *. (from_int p *. inv (from_int p))
+          && from_int p *. inv (from_int p) = 1. };
+  assert { 0 < power 4 (n+k) && 1 < p && d < p-1 };
+  assert {  d' <= d + 1
+         by if p - 1 - d <= r then d' = d + 1 
+            else d' = d };
+  assert {  d - 1 <= d'' 
+         by if r < d then d'' = d - 1 
+            else d'' = d };
   if 2*r <= p then (
-    assert { r < p - 1 - d };
+    assert {  r < p - 1 - d
+           by 2 < p
+           
+           so 2*p + 2 < 3*p 
+              && p > 0
+           
+           so 2*p*p + 2*p < 3*p*p
+           
+           so 2*p*p - 2*p + 4*p < 3*p*p
+           
+           so p*2*(p-1) + p*p + 4*p < 4*p*p
+              && 4. *. _B (n + k) = _B (n + k) *. 4. <=. sqr (from_int p)   
+           
+           so 2*r*2*(p-1) + p*p + 4*p < 4*p*p 
+              && _B (n + k) *. 4. = from_int ((power 4 (n+k))*4) 
+              && sqr (from_int p) = from_int (p*p)
+              && 4*power 4 (n+k) = (power 4 (n+k))*4 <= p*p
+           
+           so r * 4*(p-1) + 4*power 4 (n+k) + 4*p < 4*p*p
+           
+           so r * 4*p + 4*(power 4 (n+k) - r) + 4*p < 4*p*p && power 4 (n+k) - r = d*p
+           
+           so (r + d + 1) * (4*p) < p*(4*p)
+              && 0 < 4*p };
     assert { d' = d };
+    assert {  (from_int d -. 1.) *. inv (_B n) <. (inv x *. _B n) *. inv (_B n) <. (from_int d +. 1.) *. inv (_B n)
+           by from_int d -. 1. <. inv x *. _B n  <. from_int d +. 1. 
+           && 0. <. inv (_B n) };
     d)
   else 
     d+1
