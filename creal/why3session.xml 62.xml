@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="2" name="Eprover" version="2.2" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="3" name="CVC4" version="1.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="6" name="Z3" version="4.8.4" timelimit="1" steplimit="0" memlimit="1000"/>
+<file name="../creal.mlw" proved="true">
+<theory name="Top">
+ <goal name="VC power2">
+ <proof prover="3" timelimit="5"><result status="valid" time="0.05"/></proof>
+ </goal>
+ <goal name="VC shift_left">
+ <proof prover="0" timelimit="5"><result status="valid" time="0.00" steps="0"/></proof>
+ </goal>
+ <goal name="VC ediv_mod">
+ <proof prover="3" timelimit="5"><result status="valid" time="0.86"/></proof>
+ </goal>
+ <goal name="VC shift_right">
+ <proof prover="3" timelimit="5"><result status="valid" time="0.09"/></proof>
+ </goal>
+ <goal name="VC isqrt">
+ <transf name="split_vc" >
+  <goal name="VC isqrt.0">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.04"/></proof>
+  </goal>
+  <goal name="VC isqrt.1">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.04"/></proof>
+  </goal>
+  <goal name="VC isqrt.2">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.06"/></proof>
+  </goal>
+  <goal name="VC isqrt.3">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.14"/></proof>
+  </goal>
+  <goal name="VC isqrt.4">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC isqrt.5">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.08"/></proof>
+  </goal>
+  <goal name="VC isqrt.6">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.34"/></proof>
+  </goal>
+  <goal name="VC isqrt.7">
+  <transf name="split_vc" >
+   <goal name="VC isqrt.7.0">
+   <proof prover="3" timelimit="5"><result status="valid" time="2.25"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.1">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.02" steps="18"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.2">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.02" steps="20"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.3">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.02" steps="22"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.4">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="22"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.5">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="25"/></proof>
+   </goal>
+   <goal name="VC isqrt.7.6">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.09" steps="27"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC isqrt.8">
+  <transf name="split_vc" >
+   <goal name="VC isqrt.8.0">
+   <proof prover="0" timelimit="5"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5"><result status="valid" time="0.31"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.1">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="18"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.2">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.02" steps="21"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.3">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.02" steps="23"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.4">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.28" steps="25"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.5">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.23" steps="27"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.6">
+   <proof prover="0" timelimit="5"><result status="valid" time="4.08" steps="137"/></proof>
+   <proof prover="3" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.7">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.51" steps="122"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.8">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="31"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.9">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="32"/></proof>
+   </goal>
+   <goal name="VC isqrt.8.10">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="33"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC isqrt.9">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.55"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="_B_non_neg">
+ <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="32"/></proof>
+ </goal>
+ <goal name="_B_non_neg_strict">
+ <proof prover="3"><result status="valid" time="0.10"/></proof>
+ </goal>
+ <goal name="_B_group_homomorphism">
+ <proof prover="0"><result status="valid" time="0.01" steps="164"/></proof>
+ <proof prover="3"><result status="timeout" time="1.00"/></proof>
+ </goal>
+ <goal name="_B_inverse">
+ <proof prover="0" timelimit="5"><result status="valid" time="0.10" steps="44"/></proof>
+ </goal>
+ <goal name="_B_sqrt_mul">
+ <proof prover="0" timelimit="5"><result status="valid" time="0.47" steps="204"/></proof>
+ </goal>
+ <goal name="_B_spec_pos">
+ <transf name="intros" arg1="n,H">
+  <goal name="_B_spec_pos.0">
+  <transf name="assert" arg1="(pow (from_int 4) (from_int n) = from_int (power 4 n))">
+   <goal name="_B_spec_pos.0.0">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="12"/></proof>
+   </goal>
+   <goal name="_B_spec_pos.0.1">
+   <proof prover="1"><result status="valid" time="0.03"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="_B_spec_neg_0">
+ <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="12"/></proof>
+ </goal>
+ <goal name="_B_spec_neg">
+ <proof prover="0" timelimit="5"><result status="valid" time="0.04" steps="67"/></proof>
+ </goal>
+ <goal name="pow_mul2_exp">
+ <proof prover="0" timelimit="5"><result status="valid" time="0.12" steps="60"/></proof>
+ <proof prover="2" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
+ </goal>
+ <goal name="VC round_z_over_4">
+ <transf name="split_vc" >
+  <goal name="VC round_z_over_4.0">
+  <proof prover="3" timelimit="5"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC round_z_over_4.1">
+  <transf name="split_vc" >
+   <goal name="VC round_z_over_4.1.0">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.04" steps="148"/></proof>
+   </goal>
+   <goal name="VC round_z_over_4.1.1">
+   <transf name="split_all_full" >
+    <goal name="VC round_z_over_4.1.1.0">
+    <proof prover="0"><result status="valid" time="0.37" steps="409"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC round_z_over_4.1.2">
+   <proof prover="0"><result status="valid" time="0.73" steps="559"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC round_z_over_4.2">
+  <transf name="split_all_full" >
+   <goal name="VC round_z_over_4.2.0">
+   <proof prover="0"><result status="valid" time="0.10" steps="99"/></proof>
+   </goal>
+   <goal name="VC round_z_over_4.2.1">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+   <goal name="VC round_z_over_4.2.2">
+   <proof prover="3"><result status="valid" time="0.05"/></proof>
+   </goal>
+   <goal name="VC round_z_over_4.2.3">
+   <transf name="introduce_premises" >
+    <goal name="VC round_z_over_4.2.3.0">
+    <transf name="inline_goal" >
+     <goal name="VC round_z_over_4.2.3.0.0">
+     <proof prover="0" timelimit="30" memlimit="4000"><result status="valid" time="10.28" steps="6092"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC round_z_over_4.3">
+  <proof prover="0"><result status="valid" time="0.71" steps="674"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC compute_round">
+ <transf name="split_all_full" >
+  <goal name="VC compute_round.0">
+  <transf name="split_all_full" >
+   <goal name="VC compute_round.0.0">
+   <proof prover="3"><result status="valid" time="0.05"/></proof>
+   </goal>
+   <goal name="VC compute_round.0.1">
+   <proof prover="0"><result status="valid" time="1.17" steps="573"/></proof>
+   </goal>
+   <goal name="VC compute_round.0.2">
+   <proof prover="0"><result status="valid" time="0.09" steps="109"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   </goal>
+   <goal name="VC compute_round.0.3">
+   <proof prover="0"><result status="valid" time="0.02" steps="18"/></proof>
+   </goal>
+   <goal name="VC compute_round.0.4">
+   <proof prover="3" timelimit="5"><result status="valid" time="0.07"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_round.1">
+  <transf name="split_all_full" >
+   <goal name="VC compute_round.1.0">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+   <goal name="VC compute_round.1.1">
+   <proof prover="0"><result status="valid" time="0.12" steps="120"/></proof>
+   </goal>
+   <goal name="VC compute_round.1.2">
+   <proof prover="0"><result status="valid" time="1.09" steps="429"/></proof>
+   </goal>
+   <goal name="VC compute_round.1.3">
+   <proof prover="0"><result status="valid" time="0.02" steps="20"/></proof>
+   </goal>
+   <goal name="VC compute_round.1.4">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_round.2">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC compute_add">
+ <proof prover="0"><result status="valid" time="0.02" steps="44"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ </goal>
+ <goal name="VC compute_neg">
+ <proof prover="0"><result status="valid" time="0.02" steps="93"/></proof>
+ </goal>
+ <goal name="VC compute_sub">
+ <proof prover="3"><result status="valid" time="0.09"/></proof>
+ </goal>
+ <goal name="VC compute_cst">
+ <transf name="split_all_full" >
+  <goal name="VC compute_cst.0">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+  <goal name="VC compute_cst.1">
+  <transf name="split_vc" >
+   <goal name="VC compute_cst.1.0">
+   <proof prover="0"><result status="valid" time="0.02" steps="176"/></proof>
+   </goal>
+   <goal name="VC compute_cst.1.1">
+   <proof prover="0"><result status="valid" time="0.02" steps="16"/></proof>
+   </goal>
+   <goal name="VC compute_cst.1.2">
+   <proof prover="0" timelimit="5"><result status="valid" time="0.13" steps="153"/></proof>
+   </goal>
+   <goal name="VC compute_cst.1.3">
+   <proof prover="0"><result status="valid" time="0.03" steps="20"/></proof>
+   </goal>
+   <goal name="VC compute_cst.1.4">
+   <proof prover="0"><result status="valid" time="0.02" steps="22"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_cst.2">
+  <transf name="split_vc" >
+   <goal name="VC compute_cst.2.0">
+   <proof prover="0"><result status="valid" time="0.02" steps="16"/></proof>
+   </goal>
+   <goal name="VC compute_cst.2.1">
+   <proof prover="3"><result status="valid" time="0.16"/></proof>
+   </goal>
+   <goal name="VC compute_cst.2.2">
+   <proof prover="0"><result status="valid" time="0.04" steps="20"/></proof>
+   </goal>
+   <goal name="VC compute_cst.2.3">
+   <proof prover="0"><result status="valid" time="0.22" steps="195"/></proof>
+   </goal>
+   <goal name="VC compute_cst.2.4">
+   <proof prover="0"><result status="valid" time="0.04" steps="24"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_cst.3">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+  <goal name="VC compute_cst.4">
+  <proof prover="3"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC compute_cst.5">
+  <transf name="split_vc" >
+   <goal name="VC compute_cst.5.0">
+   <proof prover="0"><result status="valid" time="0.06" steps="14"/></proof>
+   </goal>
+   <goal name="VC compute_cst.5.1">
+   <proof prover="0"><result status="valid" time="0.01" steps="14"/></proof>
+   </goal>
+   <goal name="VC compute_cst.5.2">
+   <proof prover="0"><result status="valid" time="0.34" steps="297"/></proof>
+   </goal>
+   <goal name="VC compute_cst.5.3">
+   <proof prover="2"><result status="valid" time="0.38"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_cst.6">
+  <transf name="split_vc" >
+   <goal name="VC compute_cst.6.0">
+   <proof prover="0"><result status="valid" time="0.02" steps="16"/></proof>
+   </goal>
+   <goal name="VC compute_cst.6.1">
+   <proof prover="3"><result status="valid" time="0.04"/></proof>
+   </goal>
+   <goal name="VC compute_cst.6.2">
+   <proof prover="0"><result status="valid" time="0.02" steps="19"/></proof>
+   </goal>
+   <goal name="VC compute_cst.6.3">
+   <proof prover="0"><result status="valid" time="0.01" steps="19"/></proof>
+   </goal>
+   <goal name="VC compute_cst.6.4">
+   <proof prover="2"><result status="valid" time="0.43"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_cst.7">
+  <proof prover="0"><result status="valid" time="0.05" steps="111"/></proof>
+  </goal>
+  <goal name="VC compute_cst.8">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+  <goal name="VC compute_cst.9">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC _sqrt_incr_spec">
+ <proof prover="0"><result status="valid" time="0.15" steps="333"/></proof>
+ </goal>
+ <goal name="VC _sqrt_incr_bounds">
+ <transf name="split_vc" >
+  <goal name="VC _sqrt_incr_bounds.0">
+  <proof prover="0"><result status="valid" time="0.07" steps="270"/></proof>
+  </goal>
+  <goal name="VC _sqrt_incr_bounds.1">
+  <proof prover="0"><result status="valid" time="0.02" steps="53"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC sqrt_ceil_floor">
+ <transf name="split_vc" >
+  <goal name="VC sqrt_ceil_floor.0">
+  <proof prover="3"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC sqrt_ceil_floor.1">
+  <proof prover="6"><result status="valid" time="0.03"/></proof>
+  </goal>
+  <goal name="VC sqrt_ceil_floor.2">
+  <transf name="split_vc" >
+   <goal name="VC sqrt_ceil_floor.2.0">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+   <goal name="VC sqrt_ceil_floor.2.1">
+   <proof prover="0"><result status="valid" time="0.01" steps="17"/></proof>
+   </goal>
+   <goal name="VC sqrt_ceil_floor.2.2">
+   <proof prover="3"><result status="valid" time="0.22"/></proof>
+   </goal>
+   <goal name="VC sqrt_ceil_floor.2.3">
+   <proof prover="0"><result status="valid" time="0.13" steps="153"/></proof>
+   </goal>
+   <goal name="VC sqrt_ceil_floor.2.4">
+   <proof prover="0"><result status="valid" time="0.18" steps="143"/></proof>
+   </goal>
+   <goal name="VC sqrt_ceil_floor.2.5">
+   <proof prover="3"><result status="valid" time="0.26"/></proof>
+   </goal>
+   <goal name="VC sqrt_ceil_floor.2.6">
+   <proof prover="0"><result status="valid" time="0.34" steps="173"/></proof>
+   </goal>
+   <goal name="VC sqrt_ceil_floor.2.7">
+   <proof prover="0"><result status="valid" time="0.34" steps="180"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC sqrt_ceil_floor.3">
+  <proof prover="3"><result status="valid" time="0.04"/></proof>
+  </goal>
+  <goal name="VC sqrt_ceil_floor.4">
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  </goal>
+  <goal name="VC sqrt_ceil_floor.5">
+  <proof prover="3"><result status="valid" time="0.04"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC sqrt_floor_floor">
+ <transf name="split_vc" >
+  <goal name="VC sqrt_floor_floor.0">
+  <proof prover="3"><result status="valid" time="0.13"/></proof>
+  </goal>
+  <goal name="VC sqrt_floor_floor.1">
+  <proof prover="3"><result status="valid" time="0.09"/></proof>
+  </goal>
+  <goal name="VC sqrt_floor_floor.2">
+  <proof prover="3"><result status="valid" time="0.04"/></proof>
+  </goal>
+  <goal name="VC sqrt_floor_floor.3">
+  <proof prover="0"><result status="valid" time="0.08" steps="113"/></proof>
+  </goal>
+  <goal name="VC sqrt_floor_floor.4">
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC compute_sqrt">
+ <transf name="split_vc" >
+  <goal name="VC compute_sqrt.0">
+  <proof prover="3"><result status="valid" time="0.09"/></proof>
+  </goal>
+  <goal name="VC compute_sqrt.1">
+  <transf name="split_vc" >
+   <goal name="VC compute_sqrt.1.0">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.1.1">
+   <proof prover="0"><result status="valid" time="0.02" steps="20"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.1.2">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.1.3">
+   <proof prover="3"><result status="valid" time="0.07"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.1.4">
+   <proof prover="3"><result status="valid" time="0.08"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.1.5">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.1.6">
+   <proof prover="0"><result status="valid" time="0.13" steps="121"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_sqrt.2">
+  <transf name="split_vc" >
+   <goal name="VC compute_sqrt.2.0">
+   <proof prover="3"><result status="valid" time="0.08"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.1">
+   <proof prover="3"><result status="valid" time="0.08"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.2">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.3">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.4">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.5">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.6">
+   <proof prover="0"><result status="valid" time="0.02" steps="28"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.7">
+   <proof prover="0"><result status="valid" time="0.02" steps="30"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.8">
+   <proof prover="0"><result status="valid" time="0.03" steps="32"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.9">
+   <proof prover="6"><result status="valid" time="0.04"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.2.10">
+   <proof prover="0"><result status="valid" time="0.03" steps="36"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_sqrt.3">
+  <transf name="split_vc" >
+   <goal name="VC compute_sqrt.3.0">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.1">
+   <proof prover="3"><result status="valid" time="0.11"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.2">
+   <proof prover="0"><result status="valid" time="0.03" steps="22"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.3">
+   <proof prover="3"><result status="valid" time="0.10"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.4">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.5">
+   <transf name="clear_but" arg1="H1,H">
+    <goal name="VC compute_sqrt.3.5.0">
+    <proof prover="0"><result status="valid" time="0.08" steps="184"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute_sqrt.3.6">
+   <proof prover="3"><result status="valid" time="0.04"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.7">
+   <proof prover="0"><result status="valid" time="0.02" steps="28"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.8">
+   <proof prover="3"><result status="valid" time="0.10"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.9">
+   <proof prover="3"><result status="valid" time="0.05"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.10">
+   <proof prover="3"><result status="valid" time="0.04"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.11">
+   <proof prover="0"><result status="valid" time="0.03" steps="32"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.12">
+   <proof prover="0"><result status="valid" time="0.03" steps="34"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.13">
+   <proof prover="0"><result status="valid" time="0.04" steps="36"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.14">
+   <proof prover="0"><result status="valid" time="0.45" steps="215"/></proof>
+   </goal>
+   <goal name="VC compute_sqrt.3.15">
+   <proof prover="0"><result status="valid" time="0.04" steps="40"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute_sqrt.4">
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  </goal>
+  <goal name="VC compute_sqrt.5">
+  <proof prover="0"><result status="valid" time="0.03" steps="160"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC compute">
+ <proof prover="3"><result status="valid" time="0.72"/></proof>
+ </goal>
+ <goal name="VC euclid_uniq">
+ <proof prover="3"><result status="valid" time="0.08"/></proof>
+ </goal>
+ <goal name="VC dividend_incr">
+ <transf name="split_vc" >
+  <goal name="VC dividend_incr.0">
+  <proof prover="3"><result status="valid" time="0.05"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.1">
+  <proof prover="0"><result status="valid" time="0.02" steps="55"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.2">
+  <transf name="split_vc" >
+   <goal name="VC dividend_incr.2.0">
+   <proof prover="0"><result status="valid" time="0.02" steps="24"/></proof>
+   </goal>
+   <goal name="VC dividend_incr.2.1">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+   <goal name="VC dividend_incr.2.2">
+   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   </goal>
+   <goal name="VC dividend_incr.2.3">
+   <proof prover="3"><result status="valid" time="0.09"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC dividend_incr.3">
+  <proof prover="0"><result status="valid" time="0.02" steps="56"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.4">
+  <proof prover="0"><result status="valid" time="0.05" steps="124"/></proof>
+  </goal>
+  <goal name="VC dividend_incr.5">
+  <proof prover="0"><result status="valid" time="0.03" steps="81"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC dividend_decr">
+ <transf name="split_vc" >
+  <goal name="VC dividend_decr.0">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.1">
+  <proof prover="0"><result status="valid" time="0.03" steps="61"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.2">
+  <proof prover="0"><result status="valid" time="0.06" steps="131"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.3">
+  <proof prover="0"><result status="valid" time="0.03" steps="60"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.4">
+  <proof prover="0"><result status="valid" time="0.03" steps="73"/></proof>
+  </goal>
+  <goal name="VC dividend_decr.5">
+  <proof prover="0"><result status="valid" time="0.07" steps="116"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="VC inv_simple_simple">
+ </goal>
+</theory>
+</file>
+</why3session>

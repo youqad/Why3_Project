@@ -177,39 +177,21 @@
    <proof prover="0" timelimit="5"><result status="valid" time="0.04" steps="154"/></proof>
    </goal>
    <goal name="VC round_z_over_4.1.1" expl="VC for round_z_over_4" proved="true">
-   <proof prover="3"><result status="valid" time="0.17"/></proof>
-   </goal>
-   <goal name="VC round_z_over_4.1.2" expl="VC for round_z_over_4" proved="true">
-   <proof prover="3"><result status="valid" time="0.08"/></proof>
-   </goal>
-   <goal name="VC round_z_over_4.1.3" expl="VC for round_z_over_4" proved="true">
-   <proof prover="3"><result status="valid" time="0.04"/></proof>
-   </goal>
-   <goal name="VC round_z_over_4.1.4" expl="VC for round_z_over_4" proved="true">
    <transf name="split_all_full" proved="true" >
-    <goal name="VC round_z_over_4.1.4.0" expl="VC for round_z_over_4" proved="true">
-    <proof prover="3"><result status="valid" time="0.08"/></proof>
+    <goal name="VC round_z_over_4.1.1.0" expl="VC for round_z_over_4" proved="true">
+    <proof prover="0"><result status="valid" time="0.37" steps="419"/></proof>
     </goal>
    </transf>
    </goal>
-   <goal name="VC round_z_over_4.1.5" expl="VC for round_z_over_4" proved="true">
-   <proof prover="3"><result status="valid" time="0.22"/></proof>
-   </goal>
-   <goal name="VC round_z_over_4.1.6" expl="VC for round_z_over_4" proved="true">
-   <proof prover="3"><result status="valid" time="0.09"/></proof>
-   </goal>
-   <goal name="VC round_z_over_4.1.7" expl="VC for round_z_over_4" proved="true">
-   <proof prover="0"><result status="valid" time="0.23" steps="180"/></proof>
-   </goal>
-   <goal name="VC round_z_over_4.1.8" expl="VC for round_z_over_4" proved="true">
-   <proof prover="0"><result status="valid" time="0.01" steps="22"/></proof>
+   <goal name="VC round_z_over_4.1.2" expl="VC for round_z_over_4" proved="true">
+   <proof prover="0"><result status="valid" time="0.73" steps="569"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="VC round_z_over_4.2" expl="assertion" proved="true">
   <transf name="split_all_full" proved="true" >
    <goal name="VC round_z_over_4.2.0" expl="VC for round_z_over_4" proved="true">
-   <proof prover="0"><result status="valid" time="0.15" steps="101"/></proof>
+   <proof prover="0"><result status="valid" time="0.10" steps="101"/></proof>
    </goal>
    <goal name="VC round_z_over_4.2.1" expl="VC for round_z_over_4" proved="true">
    <proof prover="3"><result status="valid" time="0.06"/></proof>
@@ -218,18 +200,20 @@
    <proof prover="3"><result status="valid" time="0.05"/></proof>
    </goal>
    <goal name="VC round_z_over_4.2.3" expl="VC for round_z_over_4" proved="true">
-   <proof prover="3"><result status="valid" time="0.19"/></proof>
-   </goal>
-   <goal name="VC round_z_over_4.2.4" expl="VC for round_z_over_4" proved="true">
-   <proof prover="3"><result status="valid" time="0.20"/></proof>
-   </goal>
-   <goal name="VC round_z_over_4.2.5" expl="VC for round_z_over_4" proved="true">
-   <proof prover="3"><result status="valid" time="0.07"/></proof>
+   <transf name="introduce_premises" proved="true" >
+    <goal name="VC round_z_over_4.2.3.0" expl="VC for round_z_over_4" proved="true">
+    <transf name="inline_goal" proved="true" >
+     <goal name="VC round_z_over_4.2.3.0.0" expl="VC for round_z_over_4" proved="true">
+     <proof prover="0" timelimit="30" memlimit="4000"><result status="valid" time="8.92" steps="6118"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
   <goal name="VC round_z_over_4.3" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.69" steps="684"/></proof>
+  <proof prover="0"><result status="valid" time="0.71" steps="684"/></proof>
   </goal>
  </transf>
  </goal>
@@ -241,7 +225,7 @@
    <proof prover="3"><result status="valid" time="0.05"/></proof>
    </goal>
    <goal name="VC compute_round.0.1" expl="VC for compute_round" proved="true">
-   <proof prover="0"><result status="valid" time="1.22" steps="573"/></proof>
+   <proof prover="0"><result status="valid" time="0.85" steps="573"/></proof>
    </goal>
    <goal name="VC compute_round.0.2" expl="VC for compute_round" proved="true">
    <proof prover="0"><result status="valid" time="0.09" steps="109"/></proof>
@@ -350,7 +334,7 @@
    <proof prover="0"><result status="valid" time="0.34" steps="297"/></proof>
    </goal>
    <goal name="VC compute_cst.5.3" expl="VC for compute_cst" proved="true">
-   <proof prover="2"><result status="valid" time="0.52"/></proof>
+   <proof prover="2"><result status="valid" time="0.38"/></proof>
    </goal>
   </transf>
   </goal>
@@ -657,104 +641,6 @@
   </goal>
  </transf>
  </goal>
- <goal name="VC inv_decreasing" expl="VC for inv_decreasing" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="VC inv_decreasing.0" expl="postcondition" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="VC inv_decreasing.0.0" expl="postcondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.01" steps="37"/></proof>
-   </goal>
-   <goal name="VC inv_decreasing.0.1" expl="postcondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.02" steps="43"/></proof>
-   </goal>
-   <goal name="VC inv_decreasing.0.2" expl="postcondition" proved="true">
-   <proof prover="3"><result status="valid" time="0.05"/></proof>
-   </goal>
-   <goal name="VC inv_decreasing.0.3" expl="postcondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.01" steps="17"/></proof>
-   </goal>
-   <goal name="VC inv_decreasing.0.4" expl="VC for inv_decreasing" proved="true">
-   <transf name="split_all_full" proved="true" >
-    <goal name="VC inv_decreasing.0.4.0" expl="VC for inv_decreasing" proved="true">
-    <proof prover="0" timelimit="10" memlimit="4000"><result status="valid" time="1.13" steps="71"/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="VC inv_decreasing.0.5" expl="VC for inv_decreasing" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
-   </goal>
-   <goal name="VC inv_decreasing.0.6" expl="VC for inv_decreasing" proved="true">
-   <proof prover="0"><result status="valid" time="0.05" steps="64"/></proof>
-   </goal>
-   <goal name="VC inv_decreasing.0.7" expl="VC for inv_decreasing" proved="true">
-   <proof prover="0"><result status="valid" time="0.01" steps="23"/></proof>
-   </goal>
-   <goal name="VC inv_decreasing.0.8" expl="VC for inv_decreasing" proved="true">
-   <proof prover="0"><result status="valid" time="0.02" steps="23"/></proof>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
- <goal name="_B_inv" proved="true">
- <proof prover="0"><result status="valid" time="0.03" steps="45"/></proof>
- </goal>
- <goal name="VC inv_framing" expl="VC for inv_framing" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="VC inv_framing.0" expl="postcondition" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="VC inv_framing.0.0" expl="postcondition" proved="true">
-   <proof prover="3"><result status="valid" time="0.11"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.1" expl="postcondition" proved="true">
-   <proof prover="3"><result status="valid" time="0.11"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.2" expl="postcondition" proved="true">
-   <proof prover="3"><result status="valid" time="0.22"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.3" expl="postcondition" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.4" expl="postcondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.02" steps="77"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.5" expl="postcondition" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.6" expl="VC for inv_framing" proved="true">
-   <proof prover="0"><result status="valid" time="0.02" steps="23"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.7" expl="VC for inv_framing" proved="true">
-   <proof prover="0"><result status="valid" time="0.04" steps="91"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.8" expl="VC for inv_framing" proved="true">
-   <proof prover="0"><result status="valid" time="0.03" steps="124"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.9" expl="VC for inv_framing" proved="true">
-   <proof prover="0"><result status="valid" time="0.02" steps="27"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.10" expl="VC for inv_framing" proved="true">
-   <proof prover="0"><result status="valid" time="0.04" steps="31"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.11" expl="VC for inv_framing" proved="true">
-   <proof prover="3"><result status="valid" time="0.07"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.12" expl="VC for inv_framing" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.13" expl="VC for inv_framing" proved="true">
-   <proof prover="0"><result status="valid" time="0.05" steps="34"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.14" expl="VC for inv_framing" proved="true">
-   <proof prover="4"><result status="valid" time="0.05"/></proof>
-   </goal>
-   <goal name="VC inv_framing.0.15" expl="VC for inv_framing" proved="true">
-   <proof prover="4"><result status="valid" time="0.05"/></proof>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
  <goal name="VC inv_simple_simple" expl="VC for inv_simple_simple">
  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
  <proof prover="1" obsolete="true"><result status="highfailure" time="0.07"/></proof>
@@ -764,147 +650,25 @@
  <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
  <transf name="split_vc" >
-  <goal name="VC inv_simple_simple.0" expl="assertion" proved="true">
-  <proof prover="0"><result status="valid" time="0.05" steps="67"/></proof>
+  <goal name="VC inv_simple_simple.0" expl="assertion">
   </goal>
-  <goal name="VC inv_simple_simple.1" expl="assertion" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="VC inv_simple_simple.1.0" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.14"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.1.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.21"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.1.2" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="0"><result status="valid" time="0.08" steps="149"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.1.3" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.1.4" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.14"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.1.5" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="0"><result status="valid" time="0.10" steps="165"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.1.6" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.40"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.1.7" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="0"><result status="valid" time="0.04" steps="31"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.1.8" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.13"/></proof>
-   </goal>
-  </transf>
+  <goal name="VC inv_simple_simple.1" expl="precondition">
+  <proof prover="3" obsolete="true"><result status="valid" time="0.05"/></proof>
   </goal>
-  <goal name="VC inv_simple_simple.2" expl="assertion" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="VC inv_simple_simple.2.0" expl="assertion" proved="true">
-   <proof prover="0"><result status="valid" time="0.02" steps="22"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.42"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.2" expl="assertion" proved="true">
-   <proof prover="0"><result status="valid" time="0.03" steps="26"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.3" expl="assertion" proved="true">
-   <proof prover="0"><result status="valid" time="0.03" steps="26"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.4" expl="assertion" proved="true">
-   <proof prover="0"><result status="valid" time="0.06" steps="30"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.5" expl="assertion" proved="true">
-   <proof prover="0"><result status="valid" time="0.04" steps="30"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.6" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.08"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.7" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="6"><result status="valid" time="0.04"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.8" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="0"><result status="valid" time="0.02" steps="35"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.9" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.10" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.11" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.09"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.12" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="0"><result status="valid" time="0.04" steps="40"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.2.13" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.14"/></proof>
-   </goal>
-  </transf>
+  <goal name="VC inv_simple_simple.2" expl="precondition">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.14"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="highfailure" time="0.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
   </goal>
-  <goal name="VC inv_simple_simple.3" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.31"/></proof>
+  <goal name="VC inv_simple_simple.3" expl="assertion">
   </goal>
-  <goal name="VC inv_simple_simple.4" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.27"/></proof>
-  </goal>
-  <goal name="VC inv_simple_simple.5" expl="assertion">
-  <proof prover="0"><result status="timeout" time="2.00"/></proof>
-  <transf name="split_vc" >
-   <goal name="VC inv_simple_simple.5.0" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.32"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.5.1" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.30"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.5.2" expl="VC for inv_simple_simple">
-   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-   <proof prover="1"><result status="highfailure" time="0.04"/></proof>
-   <proof prover="2"><result status="timeout" time="1.00"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
-   <proof prover="4"><result status="timeout" time="1.00"/></proof>
-   <proof prover="5"><result status="highfailure" time="0.00"/></proof>
-   <proof prover="6"><result status="timeout" time="1.00"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.5.3" expl="VC for inv_simple_simple">
-   </goal>
-  </transf>
-  </goal>
-  <goal name="VC inv_simple_simple.6" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.55"/></proof>
-  </goal>
-  <goal name="VC inv_simple_simple.7" expl="assertion">
-  <transf name="split_vc" >
-   <goal name="VC inv_simple_simple.7.0" expl="assertion" proved="true">
-   <proof prover="3"><result status="valid" time="0.12"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.7.1" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.05"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.7.2" expl="VC for inv_simple_simple">
-   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.7.3" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.19"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.7.4" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="3"><result status="valid" time="0.13"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.7.5" expl="VC for inv_simple_simple" proved="true">
-   <proof prover="0"><result status="valid" time="0.02" steps="42"/></proof>
-   </goal>
-   <goal name="VC inv_simple_simple.7.6" expl="VC for inv_simple_simple">
-   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="VC inv_simple_simple.8" expl="postcondition">
+  <goal name="VC inv_simple_simple.4" expl="postcondition">
   </goal>
  </transf>
- </goal>
- <goal name="VC inv_simple" expl="VC for inv_simple">
  </goal>
 </theory>
 </file>
