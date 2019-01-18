@@ -644,7 +644,7 @@ let inv_simple_simple (ghost x:real) (p:int) (n:int)
     assert { d'' = d };
     assert {  (from_int (d + 1) -. 1.) *. inv (_B n) <. (inv x *. _B n) *. inv (_B n) <. (from_int (d + 1) +. 1.) *. inv (_B n)
            by 0. <. inv (_B n)
-              && from_int d <. inv x *. _B n  <. from_int d +. 2.
+              && from_int d <. inv x *. _B n  <. from_int (d + 1) +. 1. = from_int d +. 2.
            so (from_int d) *. inv (_B n) <. (inv x *. _B n) *. inv (_B n)  <. (from_int d +. 2.) *. inv (_B n) };
     d+1)
     
@@ -655,7 +655,27 @@ let inv_simple (ghost x) p m n
   requires { framing x p (n+1+2*m) }
   ensures { framing (inv x) result n } 
   =
-  inv_simple_simple (x *. _B m) p (n+m)
+  assert {  1. <=. x *. _B m
+         by 0. <. _B m
+         so _B (-m) *. _B m <. x *. _B m  };
+  assert { (from_int p -. 1.) *. _B (-(n+1+m)) <. x *. _B m <. (from_int p +. 1.) *. _B (-(n+1+m))
+          by  let k = n+1+m in
+              (from_int p -. 1.) *. _B (-k + -m) <. x <. (from_int p +. 1.) *. _B (-k + -m)
+          
+          so  (from_int p -. 1.) *. _B (-k) *. _B (-m) <. x <. (from_int p +. 1.) *. _B (-k) *. _B (-m)
+          
+          so  0. <. inv (_B (-m))
+              && (from_int p -. 1.) *. _B (-k) *. _B (-m) *. inv (_B (-m)) <. x *. inv (_B (-m))
+                                                                           <. (from_int p +. 1.) *. _B (-k) *. _B (-m) *. inv (_B (-m))
+              && _B m = inv (_B (-m))
+  };
+  let res = inv_simple_simple (x *. _B m) p (n+m) in
+  assert { (from_int res -. 1.) *. _B (-n) <. inv x *. inv (_B m) *. _B m <. (from_int p +. 1.) *. _B (-n)
+         by (from_int res -. 1.) *. _B (-n + -m) <. inv x *. inv (_B m) <. (from_int res +. 1.) *. _B (-n + -m)
+         so 0. <. _B m 
+            && (from_int res -. 1.) *. _B (-n + -m) *. _B m <. inv x *. inv (_B m) *. _B m <. (from_int res +. 1.) *. _B (-n + -m) *. _B m
+            && _B (-n + -m) *. _B m = _B (-n + -m + m) = _B (-n) };
+  res
 
 (*
 let rec compute (t:term) (n:int) : int
