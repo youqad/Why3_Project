@@ -380,7 +380,7 @@ type term =
   | Neg term
   | Sub term term
   | Sqrt term
-(*  | Inv term *)
+  | Inv term
   
   
 function interp (t: term) : real = 
@@ -390,6 +390,7 @@ function interp (t: term) : real =
     | Neg t' -> -.(interp t')
     | Sub t' t'' -> interp t' -. interp t''
     | Sqrt t' -> sqrt (interp t')
+    | Inv t' -> inv (interp t')
   end
 
 inductive wf_term (term) =
@@ -403,7 +404,10 @@ inductive wf_term (term) =
       forall t t':term. wf_term t -> wf_term t' -> wf_term (Sub t t')
   | wf_sqrt: 
       forall t:term. interp t >=. 0. -> wf_term t -> wf_term (Sqrt t)
+  | wf_inv: 
+      forall t:term. interp t <> 0. -> wf_term t -> wf_term (Inv t)
 
+(*
 let rec compute (t:term) (n:int) : int
   requires { wf_term t }
   ensures { framing (interp t) result n }
@@ -422,7 +426,7 @@ let rec compute (t:term) (n:int) : int
           compute_sub n (interp t') xp (interp t'') yp  
     | Sqrt t' -> compute_sqrt n (interp t') (compute t' (2*n))
   end
-
+*)
     
 (**** V. Division ****)
 (**************)
@@ -529,6 +533,8 @@ let lemma inv_framing (x: real) (p k: int) : unit
              && _B k *. inv (from_int p +. 1.) = inv (from_int p +. 1.) *. _B k <. inv x }
   =
   ()
+  
+  
 let inv_simple_simple (ghost x:real) (p:int) (n:int)
   requires { framing x p (n+1) }
   requires { 0 <= n }
@@ -538,13 +544,19 @@ let inv_simple_simple (ghost x:real) (p:int) (n:int)
   let k = n + 1 in
   assert { _B k <. from_int p +. 1.
          by 1. <=. x <. (from_int p +. 1.) *. _B (-k) 
+         
          so _B k = 1. *. inv (_B (-k)) <. (from_int p +. 1.) *. _B (-k) *. inv (_B (-k)) };
+  
   assert {  4. <=. pow 4. (from_int k) <=. from_int p
          by pow 4. (from_int k) <. from_int p +. 1. = from_int (p+1) 
+         
          so power 4 k < p + 1
+         
          so power 4 k <= p
+         
          so from_int (power 4 k) = pow (from_int 4) (from_int k) <=. from_int p
             && from_int 4 = 4. };
+  
   assert {  _B (n+k) <=. sqr (from_int p) /. 4.
          by pow 4. (from_int (n+k)) = pow 4. (from_int n +. from_int k) 
                                     = pow 4. (from_int n) *. pow 4. (from_int k)
@@ -592,12 +604,15 @@ let inv_simple_simple (ghost x:real) (p:int) (n:int)
   let d,r = ediv_mod (power 4 (n+k)) p in
   assert {  from_int d <=. (from_int p -. 1.) /. 2. 
       by  from_int p <=. 2. *. (from_int p -. 1.)
+      
       so  from_int p /. 4. <=. 2. *. (from_int p -. 1.) /. 4. 
+      
       so  from_int d *. from_int p = from_int (power 4 (n+k)) -. from_int r  
                                   <=. from_int (power 4 (n+k)) 
                                   <=. sqr (from_int p) /. 4. = from_int p /. 4. *. from_int p 
                                   <=.  (from_int p -. 1.) /. 2. *. from_int p
           && 0. <. inv (from_int p)
+      
       so  from_int d *. (from_int p *. inv (from_int p)) = from_int d *. from_int p *. inv (from_int p) 
                                                         <=. (from_int p -. 1.) /. 2. *. from_int p *. inv (from_int p) 
                                                          = (from_int p -. 1.) /. 2. *. (from_int p *. inv (from_int p))
@@ -647,6 +662,7 @@ let inv_simple_simple (ghost x:real) (p:int) (n:int)
               && from_int d <. inv x *. _B n  <. from_int (d + 1) +. 1. = from_int d +. 2.
            so (from_int d) *. inv (_B n) <. (inv x *. _B n) *. inv (_B n)  <. (from_int d +. 2.) *. inv (_B n) };
     d+1)
+
     
 let inv_simple (ghost x) p m n
   requires { 0 <= m }
@@ -670,18 +686,25 @@ let inv_simple (ghost x) p m n
               && _B m = inv (_B (-m))
   };
   let res = inv_simple_simple (x *. _B m) p (n+m) in
-  assert { (from_int res -. 1.) *. _B (-n) <. inv x *. inv (_B m) *. _B m <. (from_int p +. 1.) *. _B (-n)
+  assert { (from_int res -. 1.) *. _B (-n) <. inv x *. inv (_B m) *. _B m <. (from_int res +. 1.) *. _B (-n)
          by (from_int res -. 1.) *. _B (-n + -m) <. inv x *. inv (_B m) <. (from_int res +. 1.) *. _B (-n + -m)
          so 0. <. _B m 
             && (from_int res -. 1.) *. _B (-n + -m) *. _B m <. inv x *. inv (_B m) *. _B m <. (from_int res +. 1.) *. _B (-n + -m) *. _B m
             && _B (-n + -m) *. _B m = _B (-n + -m + m) = _B (-n) };
   res
 
-(*
+
+
+
+use real.Abs
+use real.ExpLog
+
+
 let rec compute (t:term) (n:int) : int
   requires { wf_term t }
+  requires { 0 <= n } 
   ensures { framing (interp t) result n }
-  variant { t }
+  diverges
   =
   match t with
     | Cst x -> compute_cst n x
@@ -695,30 +718,48 @@ let rec compute (t:term) (n:int) : int
         let yp = compute t'' (n+1) in
           compute_sub n (interp t') xp (interp t'') yp  
     | Sqrt t' -> compute_sqrt n (interp t') (compute t' (2*n))
-    | Inv t ->
-        let m,sgn = msd t 0 (compute t 0) in
-        let p = compute t (n+1+2*m) in
+    | Inv t' ->
+        let m, sgn = msd t' 0 (compute t' 0) in
+        let p = compute t' (n+1+2*m) in
           if sgn
-        then inv_simple x p m n
-          else
-          - (inv_simple (-. x) (-p) m n)
+        then inv_simple (interp t') p m n
+          else let z = inv_simple (-. (interp t')) (-p) m n in (
+          assert {  (-. from_int z -. 1.) *. _B (-n) <. inv (interp t') <. (-. from_int z +. 1.) *. _B (-n) 
+                by  (from_int z -. 1.) *. _B (-n) <. -. inv (interp t') <. (from_int z +. 1.) *. _B (-n)
+                so     inv (interp t') <. -. (from_int z -. 1.) *. _B (-n) 
+                    && -. (from_int z +. 1.) *. _B (-n) <. inv (interp t') };
+          - z)
   end
 with msd (t:term) (n:int) (c:int) : (int, bool)
   requires { 0 <= n }
   requires { wf_term t }
-  requires { interp t != 0. }
+  requires { interp t <> 0. }
   requires { framing (interp t) c n }
   ensures { let m, sgn = result in
     0 <= m /\
     if sgn then _B (-m) <. interp t else interp t <. -. _B (-m) 
   }
+  (* variant { (t, ceil (log (2. /. abs (interp t))) - n) } *)
+  diverges
   =
   if c = 0 || c = 1 || c = -1 then (
     let c = compute t (n+1) in
       msd t (n+1) c)
   else (
-    if 1 < c then
-      n, true
-    else
-      n, false)
-*)
+    if 1 < c then (
+      assert {  _B (-n) *. (from_int c -. 1.) <. interp t 
+                && _B (-n) <=. (from_int c -. 1.) *. _B (-n)
+             by 1 <= c-1 
+             so 1. <=. from_int (c-1) = from_int c -. 1. 
+                && _B (-n) >. 0. };
+      n, true)
+    else (
+      assert { interp t  <. _B (-n) *. (from_int c +. 1.) 
+               && _B (-n) *. (from_int c +. 1.) <=. -. _B (-n)
+            by c < -1
+            so c + 1 <= -1
+            so from_int c +. 1. = from_int (c+1) <=. -. 1.
+               && _B (-n) >. 0. };
+      n, false))
+      
+(* variant { (t, max(2. - abs (_B n *. interp t), 0)) } *) 

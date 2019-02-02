@@ -3,7 +3,7 @@
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="5">
 <prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="1" steplimit="0" memlimit="1000"/>
-<prover id="1" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC3" version="2.4.1" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="2" name="Eprover" version="2.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="CVC4" version="1.6" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="4" name="Spass" version="3.7" timelimit="1" steplimit="0" memlimit="1000"/>
@@ -148,7 +148,7 @@
    <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="12"/></proof>
    </goal>
    <goal name="_B_spec_pos.0.1" proved="true">
-   <proof prover="1"><result status="valid" time="0.03"/></proof>
+   <proof prover="1" timelimit="5"><result status="valid" time="0.03"/></proof>
    </goal>
   </transf>
   </goal>
@@ -1295,6 +1295,7 @@
  <transf name="split_all_full" proved="true" >
   <goal name="VC compute.0" expl="postcondition" proved="true">
   <proof prover="0"><result status="valid" time="0.08" steps="18"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
   </goal>
   <goal name="VC compute.1" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.15"/></proof>
@@ -1412,8 +1413,12 @@
   </goal>
   <goal name="VC compute.39" expl="precondition" proved="true">
   <proof prover="0"><result status="valid" time="0.36" steps="214"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
   </goal>
   <goal name="VC compute.40" expl="assertion" proved="true">
+  <proof prover="0"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4"><result status="timeout" time="1.00"/></proof>
   <proof prover="6"><result status="valid" time="0.06"/></proof>
   </goal>
   <goal name="VC compute.41" expl="postcondition" proved="true">
@@ -1421,12 +1426,408 @@
   </goal>
   <goal name="VC compute.42" expl="postcondition" proved="true">
   <proof prover="0"><result status="valid" time="0.05" steps="145"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
+  </goal>
+  <goal name="VC compute.33">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.33.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="4.37"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.33.0.0">
+    <transf name="inline_goal" >
+     <goal name="VC compute.33.0.0.0">
+     <transf name="split_all_full" >
+      <goal name="VC compute.33.0.0.0.0">
+      <proof prover="0"><result status="timeout" time="1.00"/></proof>
+      <proof prover="3"><result status="timeout" time="1.00"/></proof>
+      <proof prover="4"><undone/></proof>
+      </goal>
+      <goal name="VC compute.33.0.0.0.1">
+      <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+      <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+      <proof prover="4" obsolete="true"><undone/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.33.1">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="4.39"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.33.1.0">
+    <transf name="inline_goal" >
+     <goal name="VC compute.33.1.0.0">
+     <transf name="split_all_full" >
+      <goal name="VC compute.33.1.0.0.0">
+      <proof prover="0"><result status="timeout" time="1.00"/></proof>
+      <proof prover="3"><result status="timeout" time="1.00"/></proof>
+      <proof prover="4"><undone/></proof>
+      </goal>
+      <goal name="VC compute.33.1.0.0.1">
+      <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+      <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+      <proof prover="4" obsolete="true"><undone/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.25.3">
+   </goal>
+   <goal name="VC compute.25.1">
+   </goal>
+   <goal name="VC compute.25.4">
+   </goal>
+   <goal name="VC compute.25.2">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute.12">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.12.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.12.0.0">
+    <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.8.3">
+   </goal>
+   <goal name="VC compute.8.1">
+   </goal>
+   <goal name="VC compute.8.4">
+   </goal>
+   <goal name="VC compute.8.2">
+   </goal>
+   <goal name="VC compute.8.5">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute.0">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.0.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.07"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.0.0.0">
+    <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.20.3">
+   </goal>
+   <goal name="VC compute.20.1">
+   </goal>
+   <goal name="VC compute.20.4">
+   </goal>
+   <goal name="VC compute.20.2">
+   </goal>
+   <goal name="VC compute.20.5">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute.15">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.07"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.15.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.15.0.0">
+    <transf name="inline_goal" >
+     <goal name="VC compute.15.0.0.0">
+     <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.0.3">
+   </goal>
+   <goal name="VC compute.0.1">
+   </goal>
+   <goal name="VC compute.0.4">
+   </goal>
+   <goal name="VC compute.0.2">
+   </goal>
+   <goal name="VC compute.0.5">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute.3">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.3.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.3.0.0">
+    <transf name="inline_goal" >
+     <goal name="VC compute.3.0.0.0">
+     <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.12.3">
+   </goal>
+   <goal name="VC compute.12.1">
+   </goal>
+   <goal name="VC compute.12.4">
+   </goal>
+   <goal name="VC compute.12.2">
+   </goal>
+   <goal name="VC compute.12.5">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute.20">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.20.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.20.0.0">
+    <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.33.9">
+   </goal>
+   <goal name="VC compute.33.3">
+   </goal>
+   <goal name="VC compute.33.7">
+   </goal>
+   <goal name="VC compute.33.1">
+   </goal>
+   <goal name="VC compute.33.10">
+   </goal>
+   <goal name="VC compute.33.4">
+   </goal>
+   <goal name="VC compute.33.8">
+   </goal>
+   <goal name="VC compute.33.2">
+   </goal>
+   <goal name="VC compute.33.11">
+   </goal>
+   <goal name="VC compute.33.5">
+   </goal>
+   <goal name="VC compute.33.0">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute.8">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.07"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.8.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.8.0.0">
+    <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.3.3">
+   </goal>
+   <goal name="VC compute.3.1">
+   </goal>
+   <goal name="VC compute.3.4">
+   </goal>
+   <goal name="VC compute.3.2">
+   </goal>
+   <goal name="VC compute.3.5">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute.25">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.25.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.25.0.0">
+    <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.15.3">
+   </goal>
+   <goal name="VC compute.15.1">
+   </goal>
+   <goal name="VC compute.15.4">
+   </goal>
+   <goal name="VC compute.15.2">
+   </goal>
+   <goal name="VC compute.15.5">
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC compute.28">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.07"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.28.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.28.0.0">
+    <transf name="inline_goal" >
+     <goal name="VC compute.28.0.0.0">
+     <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+     <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.28.3">
+   </goal>
+   <goal name="VC compute.28.4">
+   </goal>
+   <goal name="VC compute.28.2">
+   </goal>
+   <goal name="VC compute.28.5">
+   </goal>
+   <goal name="VC compute.28.0">
+   </goal>
+  </transf>
   </goal>
  </transf>
  </goal>
  <goal name="VC msd" expl="VC for msd">
  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
- <proof prover="1" timelimit="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+ <proof prover="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
@@ -1454,29 +1855,81 @@
   <goal name="VC msd.6" expl="postcondition" proved="true">
   <proof prover="3"><result status="valid" time="0.09"/></proof>
   </goal>
-  <goal name="VC msd.7" expl="assertion" proved="true">
-  <transf name="split_all_full" proved="true" >
-   <goal name="VC msd.7.0" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.07"/></proof>
+  <goal name="VC msd.7" expl="postcondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC msd.7.0" expl="VC for msd">
+   <proof prover="3" obsolete="true"><result status="valid" time="0.06"/></proof>
    </goal>
-   <goal name="VC msd.7.1" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.07"/></proof>
+   <goal name="VC msd.7.1" expl="VC for msd">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.07"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC msd.7.1.0" expl="VC for msd">
+    <transf name="inline_goal" >
+     <goal name="VC msd.7.1.0.0" expl="VC for msd">
+     <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="1" timelimit="30" memlimit="4000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+     <proof prover="2" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="5" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="6" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
-   <goal name="VC msd.7.2" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
+   <goal name="VC msd.7.2" expl="VC for msd">
+   <proof prover="3" obsolete="true"><result status="valid" time="0.06"/></proof>
    </goal>
-   <goal name="VC msd.7.3" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
+  </transf>
+  </goal>
+  <goal name="VC msd.8" expl="postcondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.04"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC msd.8.0" expl="VC for msd">
+   <proof prover="3" obsolete="true"><result status="valid" time="0.07"/></proof>
    </goal>
-   <goal name="VC msd.7.4" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.15"/></proof>
+   <goal name="VC msd.8.1" expl="VC for msd">
+   <proof prover="3" obsolete="true"><result status="valid" time="0.06"/></proof>
    </goal>
-   <goal name="VC msd.7.5" expl="VC for msd" proved="true">
-   <transf name="introduce_premises" proved="true" >
-    <goal name="VC msd.7.5.0" expl="VC for msd" proved="true">
-    <transf name="inline_goal" proved="true" >
-     <goal name="VC msd.7.5.0.0" expl="VC for msd" proved="true">
-     <proof prover="3"><result status="valid" time="0.06"/></proof>
+   <goal name="VC msd.8.2" expl="VC for msd">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC msd.8.2.0" expl="VC for msd">
+    <transf name="inline_goal" >
+     <goal name="VC msd.8.2.0.0" expl="VC for msd">
+     <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="1" timelimit="30" memlimit="4000" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+     <proof prover="2" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="5" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+     <proof prover="6" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
      </goal>
     </transf>
     </goal>
@@ -1484,113 +1937,111 @@
    </goal>
   </transf>
   </goal>
-  <goal name="VC msd.8" expl="assertion" proved="true">
-  <proof prover="0"><result status="valid" time="0.02" steps="20"/></proof>
-  </goal>
-  <goal name="VC msd.9" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
-  </goal>
-  <goal name="VC msd.10" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
-  </goal>
-  <goal name="VC msd.11" expl="precondition" proved="true">
+  <goal name="VC msd.9" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.07"/></proof>
   </goal>
-  <goal name="VC msd.12" expl="precondition" proved="true">
+  <goal name="VC msd.10" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.09"/></proof>
   </goal>
-  <goal name="VC msd.13" expl="precondition" proved="true">
+  <goal name="VC msd.11" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.10"/></proof>
+  </goal>
+  <goal name="VC msd.12" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.07"/></proof>
+  </goal>
+  <goal name="VC msd.13" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.08"/></proof>
   </goal>
   <goal name="VC msd.14" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.07"/></proof>
   </goal>
-  <goal name="VC msd.15" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.08"/></proof>
-  </goal>
-  <goal name="VC msd.16" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.07"/></proof>
-  </goal>
-  <goal name="VC msd.17" expl="postcondition" proved="true">
+  <goal name="VC msd.15" expl="postcondition" proved="true">
   <proof prover="3"><result status="valid" time="0.10"/></proof>
   </goal>
-  <goal name="VC msd.18" expl="assertion" proved="true">
-  <transf name="split_all_full" proved="true" >
-   <goal name="VC msd.18.0" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.08"/></proof>
-   </goal>
-   <goal name="VC msd.18.1" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.15"/></proof>
-   </goal>
-   <goal name="VC msd.18.2" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.14"/></proof>
-   </goal>
-   <goal name="VC msd.18.3" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.13"/></proof>
-   </goal>
-   <goal name="VC msd.18.4" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.16"/></proof>
-   </goal>
-   <goal name="VC msd.18.5" expl="VC for msd" proved="true">
-   <proof prover="2" timelimit="10" memlimit="4000"><result status="valid" time="1.15"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="VC msd.19" expl="assertion">
+  <goal name="VC msd.16" expl="postcondition">
   <proof prover="0"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1" timelimit="1"><result status="highfailure" time="0.05"/></proof>
+  <proof prover="1"><result status="highfailure" time="0.06"/></proof>
   <proof prover="2"><result status="timeout" time="1.00"/></proof>
   <proof prover="3"><result status="timeout" time="1.00"/></proof>
   <proof prover="4"><result status="timeout" time="1.00"/></proof>
   <proof prover="5"><result status="timeout" time="1.00"/></proof>
   <proof prover="6"><result status="timeout" time="1.00"/></proof>
   <transf name="split_all_full" >
-   <goal name="VC msd.19.0" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.14"/></proof>
-   </goal>
-   <goal name="VC msd.19.1" expl="VC for msd" proved="true">
+   <goal name="VC msd.16.0" expl="VC for msd" proved="true">
    <proof prover="3"><result status="valid" time="0.08"/></proof>
    </goal>
-   <goal name="VC msd.19.2" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.36"/></proof>
-   </goal>
-   <goal name="VC msd.19.3" expl="VC for msd" proved="true">
-   <proof prover="0"><result status="valid" time="0.04" steps="84"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
-   </goal>
-   <goal name="VC msd.19.4" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.15"/></proof>
-   </goal>
-   <goal name="VC msd.19.5" expl="VC for msd" proved="true">
-   <proof prover="3"><result status="valid" time="0.17"/></proof>
-   </goal>
-   <goal name="VC msd.19.6" expl="VC for msd">
+   <goal name="VC msd.16.1" expl="VC for msd">
    <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
-   <proof prover="1" memlimit="2000"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="1" timelimit="5" memlimit="2000"><result status="highfailure" time="0.05"/></proof>
    <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
    <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
    <proof prover="4" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
    <proof prover="5" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
    <proof prover="6" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
    <transf name="introduce_premises" >
-    <goal name="VC msd.19.6.0" expl="VC for msd">
+    <goal name="VC msd.16.1.0" expl="VC for msd">
     <transf name="inline_goal" >
-     <goal name="VC msd.19.6.0.0" expl="VC for msd">
-     <proof prover="0" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+     <goal name="VC msd.16.1.0.0" expl="VC for msd">
+     <proof prover="0" timelimit="30" memlimit="4000"><undone/></proof>
      <proof prover="3" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
-     <proof prover="4" timelimit="30" memlimit="4000"><undone/></proof>
      </goal>
     </transf>
     </goal>
    </transf>
    </goal>
+   <goal name="VC msd.16.2" expl="VC for msd" proved="true">
+   <proof prover="3"><result status="valid" time="0.07"/></proof>
+   </goal>
   </transf>
   </goal>
-  <goal name="VC msd.20" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  <goal name="VC msd.17" expl="postcondition">
+  <proof prover="3" obsolete="true"><result status="valid" time="0.07"/></proof>
   </goal>
-  <goal name="VC msd.21" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.07"/></proof>
+  <goal name="VC msd.11">
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  </goal>
+  <goal name="VC msd.0">
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  </goal>
+  <goal name="VC msd.14">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC msd.14.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><undone/></proof>
+   <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="VC msd.3">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC msd.3.0">
+   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><undone/></proof>
+   <proof prover="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   </goal>
+  </transf>
   </goal>
  </transf>
  </goal>
