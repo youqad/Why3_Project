@@ -688,6 +688,7 @@ let inv_simple (ghost x) p m n
   let res = inv_simple_simple (x *. _B m) p (n+m) in
   assert { (from_int res -. 1.) *. _B (-n) <. inv x *. inv (_B m) *. _B m <. (from_int res +. 1.) *. _B (-n)
          by (from_int res -. 1.) *. _B (-n + -m) <. inv x *. inv (_B m) <. (from_int res +. 1.) *. _B (-n + -m)
+         
          so 0. <. _B m 
             && (from_int res -. 1.) *. _B (-n + -m) *. _B m <. inv x *. inv (_B m) *. _B m <. (from_int res +. 1.) *. _B (-n + -m) *. _B m
             && _B (-n + -m) *. _B m = _B (-n + -m + m) = _B (-n) };
@@ -734,6 +735,7 @@ let rec lemma size_positive (t: term) : unit
     assert { size t = size t' + 1 > 0 }; ())
   end
 
+axiom log_increasing: forall x y: real. 0. <. x <=. y -> log x <=. log y
 
 let rec compute (t:term) (n:int) : int
   requires { wf_term t }
@@ -760,7 +762,9 @@ let rec compute (t:term) (n:int) : int
         then inv_simple (interp t') p m n
           else let z = inv_simple (-. (interp t')) (-p) m n in (
           assert {  (-. from_int z -. 1.) *. _B (-n) <. inv (interp t') <. (-. from_int z +. 1.) *. _B (-n) 
+                
                 by  (from_int z -. 1.) *. _B (-n) <. -. inv (interp t') <. (from_int z +. 1.) *. _B (-n)
+                
                 so  inv (interp t') <. -. (from_int z -. 1.) *. _B (-n) 
                     && -. (from_int z +. 1.) *. _B (-n) <. inv (interp t') };
           - z)
@@ -774,10 +778,44 @@ with msd (t:term) (n:int) (c:int) : (int, bool)
     0 <= m /\
     if sgn then _B (-m) <. interp t else interp t <. -. _B (-m) 
   }
-  variant { ceil (log (2. /. abs (interp t)) /. log 4.) - n }
+  variant { size t, ceil (log (2. /. abs (interp t)) /. log 4.) - n }
   =
   if c = 0 || c = 1 || c = -1 then (
-    let c = compute t (n+1) in
+    assert {  0 <= ceil (log (2. /. abs (interp t)) /. log 4.) - n 
+             by 0. <. _B n 
+             so from_int c -. 1. = (from_int c -. 1.) *. _B (-n) *. _B n 
+                                 <. interp t *. _B n 
+                                 <. (from_int c +. 1.) *. _B (-n) *. _B n
+                                 = from_int c +. 1. 
+             so -.2. <=. from_int c -. 1. 
+                     <. interp t *. _B n 
+                     <. from_int c +. 1. <=. 2. 
+             so    _B n *. abs (interp t) 
+                =  abs (interp t) *. _B n 
+                =  abs (interp t) *. abs (_B n) 
+                =  abs (interp t *. _B n) 
+               <=. 2.
+             
+               && abs (interp t) >. 0.
+             
+             so   _B n
+                = _B n *. abs (interp t) *. inv (abs (interp t))
+               <=. 2. *. inv (abs (interp t))
+                =  2. /. abs (interp t)
+                
+             so    from_int n *. log 4.
+                =  log (exp (from_int n *. log 4.))
+                =  log (_B n)
+               <=. log (2. /. abs (interp t))
+               
+               && log 4. >. 0.
+             
+             so     from_int n
+                 =  from_int n *. log 4. *. inv (log 4.)
+                <=. log (2. /. abs (interp t)) *. inv (log 4.)
+                 =  log (2. /. abs (interp t)) /. log 4.
+             };
+    let c = compute t (n+1) in 
       msd t (n+1) c)
   else (
     if 1 < c then (

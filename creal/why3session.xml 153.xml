@@ -1497,31 +1497,6 @@
    <proof prover="3"><result status="valid" time="0.07"/></proof>
    </goal>
    <goal name="VC msd.0.9">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
-   </goal>
-   <goal name="VC msd.0.10">
-   <proof prover="0"><result status="valid" time="0.03" steps="31"/></proof>
-   <proof prover="3"><result status="timeout" time="1.00"/></proof>
-   </goal>
-   <goal name="VC msd.0.11">
-   <proof prover="3"><result status="valid" time="0.19"/></proof>
-   </goal>
-   <goal name="VC msd.0.12">
-   <proof prover="3"><result status="valid" time="0.13"/></proof>
-   </goal>
-   <goal name="VC msd.0.13">
-   <proof prover="3"><result status="valid" time="0.12"/></proof>
-   </goal>
-   <goal name="VC msd.0.14">
-   <proof prover="2"><result status="valid" time="0.28"/></proof>
-   </goal>
-   <goal name="VC msd.0.15">
-   <proof prover="0"><result status="valid" time="0.04" steps="40"/></proof>
-   </goal>
-   <goal name="VC msd.0.16">
-   <proof prover="0"><result status="valid" time="0.04" steps="40"/></proof>
-   </goal>
-   <goal name="VC msd.0.17">
    </goal>
   </transf>
   </goal>
@@ -1658,22 +1633,6 @@
    <goal name="VC msd.14.8">
    </goal>
    <goal name="VC msd.14.9">
-   </goal>
-   <goal name="VC msd.14.10">
-   </goal>
-   <goal name="VC msd.14.11">
-   </goal>
-   <goal name="VC msd.14.12">
-   </goal>
-   <goal name="VC msd.14.13">
-   </goal>
-   <goal name="VC msd.14.14">
-   </goal>
-   <goal name="VC msd.14.15">
-   </goal>
-   <goal name="VC msd.14.16">
-   </goal>
-   <goal name="VC msd.14.17">
    </goal>
   </transf>
   </goal>
