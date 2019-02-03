@@ -1302,11 +1302,11 @@
   <goal name="VC compute.0" expl="assertion" proved="true">
   <proof prover="3"><result status="valid" time="0.13"/></proof>
   </goal>
-  <goal name="VC compute.1" expl="variant decrease" proved="true">
+  <goal name="VC compute.1" expl="variant decrease">
   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="1" timelimit="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="3"><result status="valid" time="0.13"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>

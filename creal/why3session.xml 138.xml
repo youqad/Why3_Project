@@ -7,7 +7,7 @@
 <prover id="2" name="Eprover" version="2.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="CVC4" version="1.6" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="4" name="Spass" version="3.7" timelimit="1" steplimit="0" memlimit="1000"/>
-<prover id="5" name="Vampire" version="4.3.0" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="5" name="Vampire" version="4.3.0" timelimit="30" steplimit="0" memlimit="4000"/>
 <prover id="6" name="Z3" version="4.8.4" timelimit="1" steplimit="0" memlimit="1000"/>
 <file name="../creal.mlw">
 <theory name="Top">
@@ -1291,172 +1291,165 @@
   </goal>
  </transf>
  </goal>
- <goal name="VC size" expl="VC for size" proved="true">
- <proof prover="0"><result status="valid" time="0.18" steps="2009"/></proof>
- </goal>
- <goal name="VC size_positive" expl="VC for size_positive" proved="true">
- <proof prover="0"><result status="valid" time="0.44" steps="5457"/></proof>
- </goal>
  <goal name="VC compute" expl="VC for compute">
  <transf name="split_all_full" >
-  <goal name="VC compute.0" expl="assertion" proved="true">
-  <proof prover="3"><result status="valid" time="0.13"/></proof>
+  <goal name="VC compute.0" expl="variant decrease">
+  <proof prover="0"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" timelimit="1"><result status="highfailure" time="0.06"/></proof>
+  <proof prover="2"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" timelimit="1" memlimit="1000"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6"><result status="timeout" time="1.00"/></proof>
+  <transf name="split_all_full" >
+   <goal name="VC compute.0.0" expl="VC for compute">
+   <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" memlimit="2000"><result status="highfailure" time="0.06"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.0.0.0" expl="VC for compute">
+    <proof prover="0" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="1" timelimit="30" memlimit="4000"><result status="highfailure" time="0.09"/></proof>
+    <proof prover="2" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="4" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="5"><result status="timeout" time="30.00"/></proof>
+    <proof prover="6" timelimit="30" memlimit="4000"><result status="highfailure" time="23.47"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="VC compute.0.1" expl="VC for compute">
+   <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="1" memlimit="2000"><result status="highfailure" time="0.07"/></proof>
+   <proof prover="2" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="3" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="4" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="5" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <proof prover="6" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+   <transf name="introduce_premises" >
+    <goal name="VC compute.0.1.0" expl="VC for compute">
+    <proof prover="0" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="1" timelimit="30" memlimit="4000"><result status="highfailure" time="0.06"/></proof>
+    <proof prover="2" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="3" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="4" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="5"><result status="timeout" time="30.00"/></proof>
+    <proof prover="6" timelimit="30" memlimit="4000"><result status="highfailure" time="23.36"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
   </goal>
-  <goal name="VC compute.1" expl="variant decrease" proved="true">
-  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1" timelimit="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
-  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="3"><result status="valid" time="0.13"/></proof>
-  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  </goal>
-  <goal name="VC compute.2" expl="precondition" proved="true">
+  <goal name="VC compute.1" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.15"/></proof>
   </goal>
-  <goal name="VC compute.3" expl="precondition" proved="true">
+  <goal name="VC compute.2" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.13"/></proof>
   </goal>
-  <goal name="VC compute.4" expl="variant decrease">
+  <goal name="VC compute.3" expl="variant decrease">
   </goal>
-  <goal name="VC compute.5" expl="precondition" proved="true">
+  <goal name="VC compute.4" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.16"/></proof>
   </goal>
-  <goal name="VC compute.6" expl="precondition" proved="true">
+  <goal name="VC compute.5" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.09"/></proof>
   </goal>
-  <goal name="VC compute.7" expl="precondition" proved="true">
+  <goal name="VC compute.6" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.08"/></proof>
   </goal>
-  <goal name="VC compute.8" expl="precondition" proved="true">
+  <goal name="VC compute.7" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.06"/></proof>
   </goal>
-  <goal name="VC compute.9" expl="variant decrease">
+  <goal name="VC compute.8" expl="variant decrease">
+  </goal>
+  <goal name="VC compute.9" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.14"/></proof>
   </goal>
   <goal name="VC compute.10" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.14"/></proof>
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
   </goal>
   <goal name="VC compute.11" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.06"/></proof>
   </goal>
-  <goal name="VC compute.12" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  <goal name="VC compute.12" expl="variant decrease">
   </goal>
-  <goal name="VC compute.13" expl="variant decrease">
-  </goal>
-  <goal name="VC compute.14" expl="precondition" proved="true">
+  <goal name="VC compute.13" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.17"/></proof>
   </goal>
-  <goal name="VC compute.15" expl="precondition" proved="true">
+  <goal name="VC compute.14" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.13"/></proof>
   </goal>
-  <goal name="VC compute.16" expl="variant decrease">
+  <goal name="VC compute.15" expl="variant decrease">
+  </goal>
+  <goal name="VC compute.16" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.16"/></proof>
   </goal>
   <goal name="VC compute.17" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.16"/></proof>
+  <proof prover="3"><result status="valid" time="0.09"/></proof>
   </goal>
   <goal name="VC compute.18" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.09"/></proof>
-  </goal>
-  <goal name="VC compute.19" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.08"/></proof>
   </goal>
-  <goal name="VC compute.20" expl="precondition" proved="true">
+  <goal name="VC compute.19" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.07"/></proof>
   </goal>
-  <goal name="VC compute.21" expl="variant decrease">
-  </goal>
-  <goal name="VC compute.22" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.15"/></proof>
-  </goal>
-  <goal name="VC compute.23" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.07"/></proof>
-  </goal>
-  <goal name="VC compute.24" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.15"/></proof>
-  </goal>
-  <goal name="VC compute.25" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
-  </goal>
-  <goal name="VC compute.26" expl="variant decrease">
-  </goal>
-  <goal name="VC compute.27" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.15"/></proof>
-  </goal>
-  <goal name="VC compute.28" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.07"/></proof>
-  </goal>
-  <goal name="VC compute.29" expl="variant decrease">
-  </goal>
-  <goal name="VC compute.30" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
-  </goal>
-  <goal name="VC compute.31" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.16"/></proof>
-  </goal>
-  <goal name="VC compute.32" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.15"/></proof>
-  </goal>
-  <goal name="VC compute.33" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.09"/></proof>
-  </goal>
-  <goal name="VC compute.34" expl="variant decrease">
+  <goal name="VC compute.20" expl="variant decrease">
   <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="1" timelimit="1" obsolete="true"><result status="highfailure" time="0.06"/></proof>
+  <proof prover="1" timelimit="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
   <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <proof prover="5" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" timelimit="1" memlimit="1000" obsolete="true"><result status="timeout" time="1.00"/></proof>
   <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
-  <transf name="split_all_full" >
-   <goal name="VC compute.34.0" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.1" expl="variant decrease" proved="true">
-   <proof prover="3"><result status="valid" time="0.13"/></proof>
-   </goal>
-   <goal name="VC compute.34.2" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.3" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.4" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.5" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.6" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.7" expl="variant decrease">
-   <proof prover="0" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="1" memlimit="2000" obsolete="true"><result status="highfailure" time="0.06"/></proof>
-   <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="4" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="5" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <proof prover="6" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00"/></proof>
-   <transf name="introduce_premises" >
-    <goal name="VC compute.34.7.0" expl="variant decrease">
-    <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
-    <proof prover="2" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
-    <proof prover="3" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
-    <proof prover="4" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
-    <proof prover="6" timelimit="30" memlimit="4000" obsolete="true"><result status="highfailure" time="23.40"/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="VC compute.34.8" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.9" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.10" expl="variant decrease">
-   </goal>
-   <goal name="VC compute.34.11" expl="variant decrease">
-   </goal>
-  </transf>
   </goal>
-  <goal name="VC compute.35" expl="precondition" proved="true">
+  <goal name="VC compute.21" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.15"/></proof>
+  </goal>
+  <goal name="VC compute.22" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.07"/></proof>
+  </goal>
+  <goal name="VC compute.23" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.15"/></proof>
+  </goal>
+  <goal name="VC compute.24" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  </goal>
+  <goal name="VC compute.25" expl="variant decrease">
+  </goal>
+  <goal name="VC compute.26" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.15"/></proof>
+  </goal>
+  <goal name="VC compute.27" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.07"/></proof>
+  </goal>
+  <goal name="VC compute.28" expl="variant decrease">
+  </goal>
+  <goal name="VC compute.29" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  </goal>
+  <goal name="VC compute.30" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.16"/></proof>
+  </goal>
+  <goal name="VC compute.31" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.15"/></proof>
+  </goal>
+  <goal name="VC compute.32" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.09"/></proof>
+  </goal>
+  <goal name="VC compute.33" expl="variant decrease">
+  </goal>
+  <goal name="VC compute.34" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.17"/></proof>
   </goal>
-  <goal name="VC compute.36" expl="precondition" proved="true">
+  <goal name="VC compute.35" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.09"/></proof>
+  </goal>
+  <goal name="VC compute.36" expl="precondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.07"/></proof>
   </goal>
   <goal name="VC compute.37" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.07"/></proof>
@@ -1471,39 +1464,36 @@
   <proof prover="3"><result status="valid" time="0.07"/></proof>
   </goal>
   <goal name="VC compute.41" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.07"/></proof>
+  <proof prover="3"><result status="valid" time="0.09"/></proof>
   </goal>
   <goal name="VC compute.42" expl="precondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.09"/></proof>
-  </goal>
-  <goal name="VC compute.43" expl="precondition" proved="true">
   <proof prover="3"><result status="valid" time="0.11"/></proof>
   </goal>
-  <goal name="VC compute.44" expl="precondition" proved="true">
+  <goal name="VC compute.43" expl="precondition" proved="true">
   <proof prover="0"><result status="valid" time="0.36" steps="214"/></proof>
   </goal>
-  <goal name="VC compute.45" expl="assertion" proved="true">
+  <goal name="VC compute.44" expl="assertion" proved="true">
   <proof prover="6"><result status="valid" time="0.06"/></proof>
   </goal>
-  <goal name="VC compute.46" expl="postcondition" proved="true">
+  <goal name="VC compute.45" expl="postcondition" proved="true">
   <proof prover="3"><result status="valid" time="0.09"/></proof>
+  </goal>
+  <goal name="VC compute.46" expl="postcondition" proved="true">
+  <proof prover="3"><result status="valid" time="0.15"/></proof>
   </goal>
   <goal name="VC compute.47" expl="postcondition" proved="true">
   <proof prover="3"><result status="valid" time="0.15"/></proof>
   </goal>
   <goal name="VC compute.48" expl="postcondition" proved="true">
-  <proof prover="3"><result status="valid" time="0.15"/></proof>
-  </goal>
-  <goal name="VC compute.49" expl="postcondition" proved="true">
   <proof prover="0"><result status="valid" time="0.05" steps="28"/></proof>
   </goal>
-  <goal name="VC compute.50" expl="postcondition" proved="true">
+  <goal name="VC compute.49" expl="postcondition" proved="true">
   <proof prover="3"><result status="valid" time="0.11"/></proof>
   </goal>
-  <goal name="VC compute.51" expl="postcondition" proved="true">
+  <goal name="VC compute.50" expl="postcondition" proved="true">
   <proof prover="3"><result status="valid" time="0.14"/></proof>
   </goal>
-  <goal name="VC compute.52" expl="postcondition" proved="true">
+  <goal name="VC compute.51" expl="postcondition" proved="true">
   <proof prover="0"><result status="valid" time="0.08" steps="153"/></proof>
   </goal>
  </transf>
