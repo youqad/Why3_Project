@@ -774,7 +774,7 @@ with msd (t:term) (n:int) (c:int) : (int, bool)
     0 <= m /\
     if sgn then _B (-m) <. interp t else interp t <. -. _B (-m) 
   }
-  variant { ceil (log (2. /. abs (interp t)) /. log 4.) - n }
+  variant { size t, ceil (log (2. /. abs (interp t)) /. log 4.) - n }
   =
   if c = 0 || c = 1 || c = -1 then (
     let c = compute t (n+1) in

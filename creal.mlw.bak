@@ -744,7 +744,6 @@ let rec compute (t:term) (n:int) : int
   match t with
     | Cst x -> compute_cst n x
     | Add t' t'' -> (
-        assert { size t' < size t && size t'' < size t };
         let xp = compute t' (n+1) in
         let yp = compute t'' (n+1) in 
           compute_add n (interp t') xp (interp t'') yp)
