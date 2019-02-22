@@ -24,6 +24,7 @@ header-includes:
   - \newcommand{\B}{\mathop{\texttt{\_B}}\nolimits}
   - \newcommand{\fint}{\mathop{\texttt{from\_int }}\nolimits}
   - \newcommand{\para}{\,\mathbin{\!/\mkern-5mu/\!}\,}
+  - \newcommand{\sincr}{\mathop{\texttt{\_sqrt\_incr}}\nolimits}
 
 ---
 
@@ -224,7 +225,7 @@ All theses lemmas but the 5th and the 6th ones are straightforwardly discharged:
 
 - for the 5th one (`_B_spec_pos`): we lend a hand to the provers with the command `assert (pow (from_int 4) (from_int n) = from_int (power 4 n))`:
 
-    ![Why3 IDE: use of the `assert` command to prove `_B_spec_pos`](https://i.gyazo.com/b679167def264432370e5df05af8960e.png)
+    ![Why3 IDE: use of the `assert` command to prove `_B_spec_pos`](screenshot_command.png)
 
 - for the 6th one (`_B_spec_neg`), we first prove an easily discharged (by Alt-Ergo) lemma:
 
@@ -297,32 +298,168 @@ Those pose no difficulty:
 
 ## 4.3 Conversion of Integer Constants
 
+`compute_cst` is easy on paper, but is a bit thornier in Why3: we show the relevant inequalities in each case
 
+- if $n < 0$:
+
+    - $(x \para 2^{-2n} - 1) × \B (-n) < x$ stems from $(x \para 2^{-2n}) × \B (-n) ≤ x$ (by definition of the euclidean division) and $\B (-n) > 0$
+    - $x < (x \para 2^{-2n} + 1) × \B (-n)$ comes from $x$ being equal to $(x \para 2^{-2n}) × \B (-n) + \underbrace{(x \mod \B (-n))}_{< \B (-n)}$
+
+- if $n ≥ 0$:
+
+    - $(x × 2^{2n} - 1) × \B (-n) = \underbrace{x × 2^{2n} × \B (-n)}_{= \, x} - \underbrace{\B (-n)}_{> 0} < x$
+
+    - $x < x + \underbrace{\B (-n)}_{> 0} = x × 2^{2n} × \B (-n) + \B (-n) = (x × 2^{-2n} + 1) × \B (-n)$
 
 ## 4.4 Square Root
 
 ### Q17. Prove these two relations
 
+It can be noted that, for all $n ∈ ℕ$:
+
+\begin{gather*}
+(\sqrt {n+1} - \sqrt n)(\sqrt {n+1} + \sqrt n) = (n+1) - n = 1\\
+\text{so that } \quad \sqrt {n+1} =  \sqrt n + \underbrace{\frac 1 {\sqrt {n+1} + \sqrt n}}_{\text{denoted by } \sincr n} \\
+\text{where } \quad 0 < \sincr n ≤ 1
+\end{gather*}
+
+Based on this observation, we show two function lemmas
+
+```caml
+let lemma _sqrt_incr_spec (n:int) : unit
+  requires { n >= 0 }
+  ensures { sqrt (from_int (n+1)) = sqrt (from_int n) +. _sqrt_incr n }
+  =
+  (* [...] *); ()
+
+let lemma _sqrt_incr_bounds (n:int) : unit
+  requires { n >= 0 }
+  ensures { 0. <. _sqrt_incr n <=. 1. }
+  =
+  (* [...] *); ()
+```
+
+that will come in handy in what follows.
+
+#### Relation 1 (`sqrt_ceil_floor` lemma): $\lceil \sqrt {n+1} \rceil - 1 ≤ \lfloor \sqrt n \rfloor$
+
+The outline of the proof on paper is:
+
+\begin{align*}
+    \lceil \sqrt {n + 1} \rceil - 1  & < \lceil \sqrt {n + 1} \rceil \\
+    & = \lceil \sqrt n + \sincr n \rceil && \text{ as } \sqrt {n + 1} = \sqrt n + \sincr n\\
+    & ≤ \lceil \underbrace{(\lfloor \sqrt n \rfloor + 1) + 1}_{∈ \, ℤ} \rceil &&\text{ since } \begin{cases}
+      \sqrt n ≤ \lfloor \sqrt n \rfloor + 1 \\
+      \sincr n ≤ 1
+    \end{cases} \text{ and } \lceil \bullet \rceil \text{ is increasing}\\
+    & = \underbrace{\lfloor \sqrt n \rfloor + 1}_{\text{denoted by } a} + 1
+\end{align*}
+
+But we have actually more than that: $\lceil \sqrt {n + 1} \rceil$ is *strictly lower* than $a + 1$.
+
+Indeed: if, by contradiction, we had $\lceil \sqrt {n + 1} \rceil = a+1$, given that:
+
+$$\sqrt n < \lfloor \sqrt n \rfloor + 1 = a = \lceil \sqrt {n + 1} \rceil - 1 < \sqrt {n+1}$$
+
+it would come that $n < a^2 < n+1$, which is absurd, since $a^2$ is an integer. So $$\lceil \sqrt {n + 1} \rceil - 1  <  \lceil \sqrt {n + 1} \rceil < a + 1 = \lfloor \sqrt n \rfloor + 2$$
+
+and as all these are integers, the result follows.
+
+The reasoning by contradiction is carried out in Why3 in this way:
+
+```caml
+if ceil x = a+1 then (
+    assert {  n-1 < a*a < n
+           by (* [...] *) };
+    absurd);
+(* [...] *)
+```
+
+#### Relation 2 (`sqrt_floor_floor` lemma): $\lfloor \sqrt n \rfloor ≤ \lfloor \sqrt {n-1} \rfloor + 1$
+
+We proceed analogously, everything is similar:
+
+\begin{align*}
+    \lfloor \sqrt n \rfloor & = \lfloor \sqrt {n-1}  + \sincr n \rfloor\\
+    & ≤ \lfloor (\lfloor \sqrt {n-1} \rfloor + 1) + 1 \rfloor \\
+    & = \underbrace{\lfloor \sqrt {n-1} \rfloor + 1}_{\text{denoted by } a} + 1
+\end{align*}
+
+and $\lfloor \sqrt n \rfloor = a + 1$ is impossible, as otherwise $\sqrt {n-1} < \lfloor \sqrt {n-1} \rfloor + 1 = a = \lfloor \sqrt n \rfloor - 1 < \sqrt n$, which would imply $n-1 < a^2 < n$.
+
 ### Q18. Prove `compute_sqrt`
+
+Assuming that
+
+$$x ≥ 0 \quad \text{ and } \quad (x_p - 1) × \B (-2n) < x < (x_p + 1) × \B (-2n)$$
+
+we show that
+
+```caml
+let compute_sqrt (n: int) (ghost x : real) (xp : int)
+  = if xp <= 0 then 0 else isqrt xp
+```
+
+ensures that the $\texttt{result}$ is an $n$-framing of $\sqrt x$.
+
+- if $x_p ≤ 0$, then: $$\quad-\B (-n) < 0 ≤ \sqrt x < \sqrt {\smash{\underbrace{(x_p + 1)}_{= 1}} × \B (-2n)} =  \B (-n)$$
+
+- if $x_p > 0$:
+
+    \begin{gather*}
+    \sqrt x < \sqrt {x_p + 1} × \B (-n) ≤ \left\lceil \sqrt {x_p + 1} \, \right\rceil × \B (-n) \overset{\text{\tiny Relation 1}}{ ≤ } \left(\left\lfloor \sqrt {x_p} \right\rfloor + 1\right) × \B (-n)\\
+    \sqrt x > \sqrt {x_p - 1} × \B (-n) ≥ \left\lfloor \sqrt {x_p - 1} \, \right\rfloor × \B (-n) \overset{\text{\tiny Relation 2}}{ ≥ } \left(\vphantom{\left\lfloor \sqrt {x_p} \right\rfloor}\smash{\underbrace{\left\lfloor \sqrt {x_p} \right\rfloor}_{= \, \texttt{isqrt } x_p}} - 1\right) × \B (-n)
+    \end{gather*}
+
+In Why3, we use the same trick as in `isqrt` to get around the fact that `sqrt` is not strictly increasing, by turning some strict inequalities into conjunctions of non-strict ones and non-equalities.
 
 ## 4.5 Compute
 
-### Q19. define a logic function `interp` that gives real interpretation of a term with the usual semantic for each operation
+### Q19-20. Define: `interp` that gives real interpretation of a term, and `wf_term` that checks that square root is adequately applied.
 
-### Q20. define `wf_term` that checks that square root is applied only to terms with non negative interpretation.
+- `interp` is resursively defined in a forthright manner
+- `wf_term` is defined as an inductive predicate. For the time being, the only non-trivial constructor case (that actually does check something, rather than inductively propagating) is `wf_sqrt: forall t:term. interp t >=. 0. -> wf_term t -> wf_term (Sqrt t)`, ensuring that `Sqrt` is exclusively applied to terms whose interpretation is non-negative.
+
 
 ### Q21. define and prove the `compute` function
+
+The first batch of the `compute` function is the following one:
+
+```{.caml emphasize=4-4}
+let rec compute (t:term) (n:int) : int
+  requires { wf_term t }
+  ensures { framing (interp t) result n }
+  variant { t }
+  =
+  match t with
+    | Cst x -> compute_cst n x
+    | Add t' t'' ->
+        let xp = compute t' (n+1) in
+        let yp = compute t'' (n+1) in
+          compute_add n (interp t') xp (interp t'') yp  
+    | Neg t' -> compute_neg n (interp t') (compute t' n)
+    | Sub t' t'' ->
+        let xp = compute t' (n+1) in
+        let yp = compute t'' (n+1) in
+          compute_sub n (interp t') xp (interp t'') yp  
+    | Sqrt t' -> compute_sqrt n (interp t') (compute t' (2*n))
+  end
+```
+
+It is defined by structural induction over the term `t`, which makes the `variant` trivially correct, and as all the contracts of the `compute_***` functions were specially written to ensure the correction of this final `compute`, CVC4 discharges the proof obligations with no trouble.
 
 # 5 Division
 
 ### Q22. Prove these two properties
 
+
+
 ### Q23. Prove the function `inv_simple_simple`
+
+
 
 ### Q24. Prove the function `inv_simple`
 
 ### Q25. extend the type `term`
 
-### Q26. prove both functions
-
-### Q27. prove the termination of the functions
+### Q26-27. prove the correction and termination of both functions
