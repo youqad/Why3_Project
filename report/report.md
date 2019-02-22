@@ -21,6 +21,10 @@ header-includes:
   - \lstset{basicstyle=\ttfamily}
   - \newcommand{\CodeEmphasis}[1]{\textcolor{red}{\textit{#1}}}
   - \newcommand{\CodeEmphasisLine}[1]{\textcolor{red}{\textit{#1}}}
+  - \newcommand{\B}{\mathop{\texttt{\_B}}\nolimits}
+  - \newcommand{\fint}{\mathop{\texttt{from\_int }}\nolimits}
+  - \newcommand{\para}{\,\mathbin{\!/\mkern-5mu/\!}\,}
+
 ---
 
 <!-- pandoc report.md -o report.md.pdf --template eisvogel-min --pdf-engine=lualatex --listings --filter pandoc-emphasize-code -->
@@ -35,9 +39,6 @@ myFunc = do
   notSoRelevant
 ``` -->
 
-$$
-\newcommand{\B}{\mathop{\tt \_B}\nolimits}
-$$
 
 Throughout this project, I installed and used the following solvers:
 
@@ -67,7 +68,7 @@ version = "4.8.4"
 
 # 2. Functions on Integers
 
-### Q1, 2, 3, 4. Give an implementation of
+### Q1-4. Give an implementation of
 #### `power2`, `shift_left` using `power2`
 
 - `power2` and `shift_left` are straightforward: the only notable point is the `for` loop invariant in `power2`:
@@ -209,56 +210,119 @@ So, which assertions where added to prove `isqrt`?
 
 ## 3.1 Power Function
 
-### Prove that
+### Q6-12. Prove that
 
-- $\B$ is positive
-- $\B n × \B m = \B (n+m)$
-- $\B n × \B (-n) = 1$
-- $0 ≤ a \quad ⟹ \quad \sqrt {a × \B {2n}} = \sqrt a × \B n$
-- $0 ≤ y \quad ⟹ \quad \B y = \texttt{from_int } 4^y$
-- $y < 0 \quad ⟹ \quad \B y = \frac 1 {\texttt{from_int } 4^{-y}}$
-- $0 ≤ y \quad ⟹ \quad 2^{2y} = 4^y$
+1. $\B$ is positive
+2. $\B n × \B m = \B (n+m)$
+3. $\B n × \B (-n) = 1$
+4. $0 ≤ a \quad ⟹ \quad \sqrt {a × \B (2n)} = \sqrt a × \B n$
+5. $0 ≤ y \quad ⟹ \quad \B y = \fint 4^y$
+6. $y < 0 \quad ⟹ \quad \B y = \frac 1 {\fint 4^{-y}}$
+7. $0 ≤ y \quad ⟹ \quad 2^{2y} = 4^y$
 
+All theses lemmas but the 5th and the 6th ones are straightforwardly discharged:
 
+- for the 5th one (`_B_spec_pos`): we lend a hand to the provers with the command `assert (pow (from_int 4) (from_int n) = from_int (power 4 n))`:
+
+    ![Why3 IDE: use of the `assert` command to prove `_B_spec_pos`](https://i.gyazo.com/b679167def264432370e5df05af8960e.png)
+
+- for the 6th one (`_B_spec_neg`), we first prove an easily discharged (by Alt-Ergo) lemma:
+
+    ```caml
+    lemma _B_spec_neg_0:  
+      forall n:int. n < 0 -> _B n *. from_int (power 4 (-n)) = 1.
+    ```
+
+    from which `_B_spec_neg` immediately ensues.
 
 
 # 4. Computational Real Numbers
 
-### 13. Could you find a reason why this definition is better than the other for automatic provers?
+### Q13. Could you find a reason why this definition is better than the other for automatic provers?
 
-### 14. Prove these three functions
+- When it comes to using to two inequalities rather the terser (and prehaps more elegant)
+
+    $$\vert x - p \, 4^{-n} \vert < 4^{-n}$$
+
+    the two-inequalities version has the advantage of not involving the absolute value `abs`, which would just be a burden when proving framing-related postconditions. Indeed, almost every time we would want to show a non-trivial framing (first needing to unfold `abs`), provers would eventually have to resort to [the `Abs_le` lemma of the standard library](http://why3.lri.fr/stdlib/real.html#Abs_), leading to unnecessary proof clutter.
+
+- As for using `_B`: this fosters the use of the relevant lemmas proved in section **3.6** by the provers, bringing about more efficient proofs.
+
+
+### Q14. Prove these three functions
+
+#### `round_z_over_4`
+
+By dint of assertions, we show the two postconditions inequalities separately:
+
+- $$\fint (\underbrace{\texttt{shift\_right } \, (z + 2) \, 2}_{= \, (z+2) \para 2^2}) ≤ (\fint z + 2) × \B (-1)$$ where $\para$ stands for the euclidean division quotient, which directly stems from $$4 ((z+2) \para 2^2) ≤ z+2 \qquad \text{(euclidean division)}$$
+
+- Similarly (the $\fint$'s will be omitted from now on): $$z - 2 < 4 × \underbrace{\texttt{shift\_right } \, (z + 2) \, 2}_{= \, (z+2) \para 2^2}$$ due to $$z - 2 < z + 2 - (\underbrace{(z+2) \mod 2^2}_{< 4}) = 4 ((z+2) \para 2^2)$$
+
+#### `compute_round` and `compute_add`
+
+- For `compute_round`, assuming
+
+    $$(z_p - 2) × \B (-(n+1)) < z ≤ (z_p + 2) × \B (-(n+1))$$
+
+    we show that
+
+    $$
+    (\underbrace{\texttt{shift\_right } \, (z_p + 2) \, 2}_{= \, (z_p+2) \para 2^2} - 1) × \B (-n) < z < ((z_p+2) \para 2^2 + 1) × \B (-n)
+    $$
+
+    by means of two assertions (one for each inequality). Indeed:
+
+    \begin{align*}
+        ((z_p+2) \para 2^2 - 1) × \B (-n)  & ≤ \Big(\underbrace{\frac {z_p+2} 4 - 1}_{= \frac {z_p} 4 - \frac 1 2}\Big) × \B (-n) && \text{ since } 4 ((z_p+2) \para 2^2) ≤ z_p + 2  \\
+        & = \frac {z_p-2} 4 × \B (-n) \\
+        & = (z_p-2) × \B (-(n+1)) \\
+        & < z \\
+        & ≤ \frac {z_p + 2} 4 × \B (-n) \\
+        & = \Big(\frac {z_p - 2} 4 + 1\Big) × \B (-n) \\
+        & < \big((z_p+2) \para 2^2 + 1\big) × \B (-n) && \text{ since } z_p - 2 <  4 ((z_p+2) \para 2^2) \text{ as seen before}\\
+    \end{align*}
+
+- Given `compute_round`'s contract, `compute_add n x xp y yp` is straightforwardly defined as `compute_round n (x +. y) (xp + yp)`
 
 ## 4.2 Subtraction
 
-### 15. Define and prove the function `compute_neg`
-### 16. Define `compute_sub` using `compute_neg` and `compute_add`
+### Q15-16. Define and prove the functions `compute_neg`, `compute_sub` using `compute_neg` and `compute_add`
+
+Those pose no difficulty:
+
+- `compute_neg n x xp` is nothing more than `-xp`, as demonstrated by multiplying the framing of `x` by $-1$
+- `compute_sub n x xp y yp` compute_adds `x` and the compute_neg'ed approximation of `y`, owing to `x` and `y` being provided at approximation $n+1$. A little help for the provers: asserting `assert { framing (-.y) yp' (n+1) }` just before yielding the result.
+
 
 ## 4.3 Conversion of Integer Constants
 
+
+
 ## 4.4 Square Root
 
-### 17. Prove these two relations
+### Q17. Prove these two relations
 
-### 18. Prove `compute_sqrt`
+### Q18. Prove `compute_sqrt`
 
 ## 4.5 Compute
 
-### 19. define a logic function `interp` that gives real interpretation of a term with the usual semantic for each operation
+### Q19. define a logic function `interp` that gives real interpretation of a term with the usual semantic for each operation
 
-### 20. define `wf_term` that checks that square root is applied only to terms with non negative interpretation.
+### Q20. define `wf_term` that checks that square root is applied only to terms with non negative interpretation.
 
-### 21. define and prove the `compute` function
+### Q21. define and prove the `compute` function
 
 # 5 Division
 
-### 22. Prove these two properties
+### Q22. Prove these two properties
 
-### 23. Prove the function `inv_simple_simple`
+### Q23. Prove the function `inv_simple_simple`
 
-### 24. Prove the function `inv_simple`
+### Q24. Prove the function `inv_simple`
 
-### 25. extend the type `term`
+### Q25. extend the type `term`
 
-### 26. prove both functions
+### Q26. prove both functions
 
-### 27. prove the termination of the functions
+### Q27. prove the termination of the functions
