@@ -52,7 +52,7 @@ CVC3|$2.4.1$
 Eprover|$2.2$
 Spass|$3.7$
 
-Most of the assertions were proved with Alt-Ergo and CVC4 (less often with Z3, and even more rarely with CVC3, Eprover and Spass). As a macOS user, the installation of Z3 was problematic (its "counterexample" counterpart was the only one to be recognized by the Why3 IDE), so much so that I had choice but to modify my `.why3.conf` file by explicitly adding a block enforcing the use of Z3:
+Most of the assertions were proved with Alt-Ergo and CVC4 (less often with Z3, and even more rarely with CVC3, Eprover and Spass). As a macOS user, the installation of Z3 was problematic (its "counterexample" counterpart was the only one to be recognized by the Why3 IDE), so much so that I had choice but to modify my `.why3.conf` file by explicitely adding a block enforcing the use of Z3:
 
 ```sh
 [prover]
@@ -241,7 +241,7 @@ All theses lemmas but the 5th and the 6th ones are straightforwardly discharged:
 
 ### Q13. Could you find a reason why this definition is better than the other for automatic provers?
 
-- When it comes to using to two inequalities rather the terser (and perhaps more elegant)
+- When it comes to using to two inequalities rather the terser (and prehaps more elegant)
 
     $$\vert x - p \, 4^{-n} \vert < 4^{-n}$$
 
@@ -417,7 +417,7 @@ In Why3, we use the same trick as in `isqrt` to get around the fact that `sqrt` 
 
 ### Q19-20. Define: `interp` that gives real interpretation of a term, and `wf_term` that checks that square root is adequately applied.
 
-- `interp` is recursively defined in a forthright manner
+- `interp` is resursively defined in a forthright manner
 - `wf_term` is defined as an inductive predicate. For the time being, the only non-trivial constructor case (that actually does check something, rather than inductively propagating) is `wf_sqrt: forall t:term. interp t >=. 0. -> wf_term t -> wf_term (Sqrt t)`, ensuring that `Sqrt` is exclusively applied to terms whose interpretation is non-negative.
 
 
@@ -688,7 +688,7 @@ We add
 
             then if $4^n (\texttt{interp } t) < -2$, i.e. $n > \log_4 {\frac {-2} {\texttt{interp } t}} = \log_4 {\frac 2 {\vert \texttt{interp } t \vert} }$, it follows that $c < 4^n (\texttt{interp } t) + 1 < -1$
 
-        and each time `msd` is recursively called, $n$ is incremented (and it is originally set at $0$).
+        and each time `mds` is recursively called, $n$ is incremented (and it is originally set at $0$).
 
     So a good variant is $(\texttt{size } t, \left\lceil \log_4 {\frac 2 {\vert \texttt{interp } t \vert}} \right\rceil - n)$ for the lexicographic order, which we can routinely check in Why3 by asserting what was outlined before and adding axiom about the `log` being increasing as suggested at the beginning of the problem statement.
 
