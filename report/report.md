@@ -323,7 +323,7 @@ It can be noted that, for all $n ∈ ℕ$:
 \text{where } \quad 0 < \sincr n ≤ 1
 \end{gather*}
 
-Based on this observation, we show two function lemmas
+Based on this observation, we show two  lemma functions
 
 ```caml
 let lemma _sqrt_incr_spec (n:int) : unit
@@ -446,20 +446,277 @@ let rec compute (t:term) (n:int) : int
   end
 ```
 
-It is defined by structural induction over the term `t`, which makes the `variant` trivially correct, and as all the contracts of the `compute_***` functions were specially written to ensure the correction of this final `compute`, CVC4 discharges the proof obligations with no trouble.
+It is defined by structural induction over the term `t`, which makes the `variant` trivially correct, and as all the contracts of the auxiliary `compute_***` functions were specially written to ensure the correction of this final `compute`, CVC4 discharges the proof obligations with no trouble.
 
 # 5 Division
 
 ### Q22. Prove these two properties
 
+**Notations**: in what follows, we will denote by $d$ (resp. $d'$, resp. $d''$) and $r$ (resp. $r'$, resp. $r''$) the quotient and the rest of the euclidean division of $a$ by $b$ (resp. $b-1$, resp. $b+1$). In other words:
 
+\begin{align*}
+    a &= db + r  && 0 ≤ r < b\\
+    a &= d'(b-1) + r' && 0 ≤ r' < b-1\\
+    a &= d''(b+1) + r'' && 0 ≤ r'' < b+1\\
+\end{align*}
+
+
+#### Property 1 (`dividend_incr`)
+
+$$\begin{cases}
+  0 < a  \\
+  0 < b \\
+  d \; ≝ \; a \para b < b\\
+\end{cases} \quad ⟹ \quad d'' \; ≝ \; a \para (b+1) =
+\begin{cases}
+  d - 1 &\text{ if } r \; ≝ \; a \mod b < d \qquad \textbf{(P1.1)}\\
+  d &\text{ else } \qquad \textbf{(P1.2)}\\
+\end{cases}
+$$
+
+Assume $a, b > 0$ and $d \; ≝ \; a \para b < b$.
+
+- if $r \; ≝ \; a \mod b < d$:
+
+    Let us show that $d'' \; ≝ \; a \para (b+1) = d-1$.
+
+    To do so, based on the lemma function suggested in the problem statement at the end of section 2 (which is easily proved by CVC4):
+
+    ```caml
+    let lemma euclid_uniq (x y q : int) : unit
+      requires { y > 0 }
+      requires { q * y <= x < q * y + y }
+      ensures { ED.div x y = q }
+      = ()
+    ```
+
+    it suffices to show that
+
+    $$(d-1)(b+1) ≤ a < d(b+1)$$
+
+    And indeed
+
+    - $(d-1)(b+1) = db + d - b - 1 ≤ db + r = a$ since $d ≤ b - 1 ≤ b + r + 1$
+    - $a = db + r < db + b = d(b+1)$ as $r < b$
+
+- if $r ≥ d$:
+
+    Let us show that $d'' = d$. Similarly:
+
+    $$d(b+1) ≤ a < (d+1)(b+1)$$
+
+    in so far as
+
+    - $d(b+1) = db + d ≤ db + r = a$
+    - $a = db + r < db + d + b + 1 = (d+1)(b+1)$ since $r < b$
+
+#### Property 2 (`dividend_decr`)
+
+$$\begin{cases}
+  0 < a  \\
+  1 < b \\
+  d \; ≝ \; a \para b < b - 1
+\end{cases} \quad ⟹ \quad d' \; ≝ \; a \para (b-1) =
+\begin{cases}
+  d + 1 &\text{ if } b-1-d < r \; ≝ \; a \mod b \qquad \textbf{(P2.1)}\\
+  d &\text{ else } \qquad \textbf{(P2.2)}
+\end{cases}
+$$
+
+Assume $a > 0, b > 1$ and $d \; ≝ \; a \para b < b - 1$.
+
+- if $b - 1 - d ≤ r \; ≝ \; a \mod b$:
+
+    Let us show that $d' \; ≝ \; a \para (b-1) = d + 1$. Indeed:
+
+    $$(d+1)(b-1) ≤ a < (d+2)(b-1)$$
+
+    because
+
+    - $(d+1)(b-1) = db + b - 1 - d ≤ db + r = a$ due to the hypothesis
+    - $a = db + r < db - d + 2b - 2 = (d+2)(b-1)$ since $r < b + \underbrace{b - d - 2}_{≥ 0}$
+
+- if $b - 1 - d > r$:
+
+    Let us show that $d' = d$. Similarly:
+
+    $$d(b-1) ≤ a < (d+1)(b-1)$$
+
+    owing to the fact that
+
+    - $d(b-1) = db - d ≤ db + r = a$ as $0 < a = db + r < (d+1) \overbrace{b}^{> 0}$ hence $d ≥ 0$, and $-d ≤ 0 ≤ r$
+    - $a = db + r < db - d + b - 1 = (d+1)(b-1)$ because of the hypothesis
+
+The two lemma functions `dividend_incr` and `dividend_decr` closely follow the proof sketches above in the Why3 implementation.
 
 ### Q23. Prove the function `inv_simple_simple`
 
+We first prove two routine lemmas (`inv_decreasing`: the fact that `inv` is decreasing over $ℝ^\ast_+$ and `_B_inv`: $∀ n, \, \B n = \frac 1 {\B (-n)}$) that are subsequently used in `inv_simple_simple`.
 
+```caml
+let inv_simple_simple (ghost x:real) (p:int) (n:int)
+    requires { framing x p (n+1) }
+    requires { 0 ≤n }
+    requires { 1. ≤. x }
+    ensures { framing (inv x) result n }
+    =
+    let k = n + 1 in
+    let d,r = ediv_mod (power2 (2*(n+k))) p in
+    if 2*r ≤p then d
+    else d+1
+```
+
+As far as I am concerned, `inv_simple_simple` was the most nettlesome function, and maybe the most confusing one too at first glance, for the following reason: as pointed out in the problem statement, we can (and we will) prove that
+
+$$d = a \para b ≤ b − 1 − a \para b$$
+
+which ensures that the conditions **P1.1** and **P2.1** cannot happen at the same time, that is: $\textbf{P1.1} ⟹ \textbf{P2.2}$ and $\textbf{P2.1} ⟹ \textbf{P1.2}$. From there, it is tempting to try to show (in each branch of `inv_simple_simple`'s `if` statement) one the first conditions of one property (**P1.1** or **P2.1**), since, as it happens, the second condition of the other property is obtained for free. But that's a misleading track! We will instead focus on the second conditions of one property (i.e. either **P1.2** or **P2.2**), disregarding the other property altogether (by just settling with the *coarsest upper/lower bound* we get from both of its conditions).
+
+
+Let's delve into it in more details. Similarly to before, we set
+
+\begin{gather*}
+(d, r) = (4^{n+k} \para p, 4^{n+k} \mod p)\\
+(d', r') = (4^{n+k} \para (p-1), 4^{n+k} \mod (p-1))\\
+(d'', r'') = (4^{n+k} \para (p+1), 4^{n+k} \mod (p+1))
+\end{gather*}
+
+- Before entering the `if` statement: we prove a handful of useful assertions
+
+    - $4 ≤ 4^k ≤ p$ and $4^n ≤ \frac p 4$
+
+        since $1 ≤ x < (p + 1) 4^{-k}$, so $4^k < p + 1$, whence $4^k ≤ p$. On top of that: $k = n + 1$ (thus $4^n ≤ \frac p 4$) and $k ≥ 1$ (hence $p ≥ 4$).
+
+    - then, as we have the precondition `framing x p (n+1)` (i.e. `framing x p k`):
+
+        $$\frac {4^k} {p+1} < \frac 1 x <  \frac {4^k} {p-1}$$
+
+        therefore
+
+        $$d'' ≤ \frac {\overbrace{4^{n+k}}^{(p+1)d'' + r''}} {p+1} < \frac {4^n} x <  \frac {\overbrace{4^{n+k}}^{(p-1)d' + r'}} {p-1} ≤ d' + 1$$
+
+    - $d ≤ \frac {p-1} 2$. Indeed:
+
+        \begin{align*}
+                & d = \frac{4^{n+k} - r}{p} ≤ \frac {p-1} 2\\
+        ⟺ \quad & 4^{n+k} - r ≤ \frac {p(p-1)} 2\\
+        ⟸ \quad & 4^{n+k} ≤ \frac {p(p-1)} 2\\
+        ⟸ \quad & \frac {p^2} 4 ≤ \frac {p(p-1)} 2\\
+        ⟸ \quad & \frac p 2 ≤ p-1\\
+        ⟸ \quad &2 ≤ p && \text{ which is true as } p ≥ 4\\
+        \end{align*}
+    - last but not least (before entering the `if`): the *coarsest bounds* we hinted at earlier:
+
+        - due to **P2**: $d' ≤ d + 1$
+        - due to **P1**: $d - 1 ≤ d''$
+
+- Inside the `if` statement:
+
+    - **if $2r ≤ p$:**
+
+        - Let us show that $\boxed{r+1 ≤ p-1-d}$:
+
+            \begin{align*}
+            & r + d + 1 < p\\
+            ⟺ \quad & rp + \underbrace{dp}_{= \, 4^{n+k} - r \, ≤ \, \frac {p^2} 4 - r} + p < p^2\\
+            ⟸ \quad & \underbrace{r}_{≤ \frac{p}{2}}(p-1) + \frac {p^2} 4 + p < p^2\\
+            ⟸ \quad & 2p(p-1) + p^2 + 4 p < 4 p^2\\
+            ⟺ \quad & 0 < p^2 - 2p = p(p-2) && \text{ which is true as } p ≥ 4\\
+            \end{align*}
+        - Thus, by **P2.2**, $d' = d$. And consequently:
+
+            $$d - 1 \overset{\text{\tiny coarse bound}}{≤} d'' < \frac {4^n} x < d' + 1 = d + 1$$
+
+    - **if $2r > p$:**
+
+        - It comes that $\boxed{r ≥ d}$, since $2r ≥ p + 1 ≥ p - 1 ≥ 2d$
+        - Thus, by **P1.2**, $d'' = d$. And consequently:
+
+            $$(d + 1) - 1 = d'' < \frac {4^n} x < d' + 1 \overset{\text{\tiny coarse bound}}{≤} (d + 1) + 1$$
 
 ### Q24. Prove the function `inv_simple`
 
+`inv_simple` take advantage of the fact that $1 ≤ x × \B m$ to resort to `inv_simple_simple`. We are given a $(n+1+2m)$-framing of $x$:
+
+\begin{gather*}
+(p-1) \B (-(n+1+2m)) < x < (p+1) \B (-(n+1+2m))\\
+\text{hence } (p-1) \B (-(n+1+m)) < x × \B m < (p+1) \B (-(n+1+m))\\
+\end{gather*}
+
+and as $1 ≤ x × \B m$, `res = inv_simple_simple (x *. _B m) p (n+m)` provides a $(n+m)$-framing of $x × \B m$:
+
+\begin{gather*}
+(\texttt{res}-1) \B (-(n+m)) < x × \B m < (\texttt{res}+1) \B (-(n+m))\\
+\text{thus } (\texttt{res}-1) \B (-n) < \underbrace{x × \B m × \B (-m)}_{= \, x} < (\texttt{res}+1) \B (-n)\\
+\end{gather*}
+
+and the result follows.
+
 ### Q25. extend the type `term`
 
+We add
+
+- the `| Inv t' -> inv (interp t')` case in `interp`
+- the `| wf_inv: forall t:term. interp t <> 0. -> wf_term t -> wf_term (Inv t)` case in `wf_term`
+
 ### Q26-27. prove the correction and termination of both functions
+
+- When it comes to the correction:
+
+    nothing really fancier than before: the only new case is `Inv t'`, and `msd` (which is called only there in `compute`) yields an `m` such that $\vert \texttt{interp } t \vert > \B (-m)$ (such an `m` always exists provided $\texttt{interp } t ≠ 0$, which is what we assume).
+
+    `mds` recursively calls itself until $\vert c \vert ≥ 2$ (where $c$ is the integer approximating $t$), thus straightforwardly ensuring the correction of the algorithm.
+
+    In `compute`, the case where the sign is negative is easily treated, similarly to `compute_neg`, by taking the opposite.
+
+- The termination is a bit more involved because of `mds`:
+
+    - when `compute t n` is called:
+
+        - either `t` is structurally smaller
+        - either `t` remains the same and `compute` has been called inside `mds`
+
+        which hints at the fact that an adequate variant would follow a lexicographic order, with the size of `t` as first component (where `size` is defined as expected).
+
+    - `mds` stops recursively calling itself as soon as $\vert c \vert > 1$.
+
+        - if $\texttt{interp } t > 0$:
+
+            then if $4^n (\texttt{interp } t) > 2$, i.e. $n > \log_4 {\frac 2 {\texttt{interp } t}} = \log_4 {\frac 2 {\vert \texttt{interp } t \vert} }$, it follows that $c > 4^n (\texttt{interp } t) - 1 > 1$
+
+        - if $\texttt{interp } t < 0$:
+
+            then if $4^n (\texttt{interp } t) < -2$, i.e. $n > \log_4 {\frac {-2} {\texttt{interp } t}} = \log_4 {\frac 2 {\vert \texttt{interp } t \vert} }$, it follows that $c < 4^n (\texttt{interp } t) + 1 < -1$
+
+        and each time `mds` is recursively called, $n$ is incremented (and it is originally set at $0$).
+
+    So a good variant is $(\texttt{size } t, \left\lceil \log_4 {\frac 2 {\vert \texttt{interp } t \vert}} \right\rceil - n)$ for the lexicographic order, which we can routinely check in Why3 by asserting what was outlined before and adding axiom about the `log` being increasing as suggested at the beginning of the problem statement.
+
+## Bonus
+
+Here is a counter-example: with
+
+- $x \; ≝ \; -0.6161$
+- $n=2$
+
+It comes that $\texttt{msd } (x) = 1$ with $x_0 = 0, x_1 = -2, …, x_5 = -630$.
+
+Let's run the proposed algorithm on this instance to compute, say, $\overline{1/x_n}$.
+
+- $n > - \texttt{msd } (x) = -1$
+- as $k = n + 2 \texttt{msd } (x) + 1 = 5$ and $x_5 = -630 ≤ 1$: it comes that
+
+    $$\overline{1/x_2} = \left\lfloor \frac{\B (k+n)}{x_k}\right\rfloor = -27$$
+
+However:
+
+$$(\overline{1/x_n} + 1) × \B (-n) = \frac {-27 + 1} {16} ≃ -1.625 < \frac 1 x ≃ - 1.623$$
+
+so the framing is not correct.
+
+
+# Conclusion
+
+I didn't find this project particularly easy (especially as I am not keen on real numbers computation usually), but it definitely was a good foray into Why3. The most difficult part was `inv_simple_simple`, due to the fact that I got bogged down in a misleading track (as explained before) by misinterpreting a cue in the problem statement.
+
+With some of my friends, I have jotted down a handful of suggestions about axioms that I think could be good adjuncts to the standard library, and a few features that may enhance the user experience of the Why3 IDE. I will enclose them in a forthcoming email.
