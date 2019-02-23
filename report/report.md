@@ -710,7 +710,7 @@ Let's run the proposed algorithm on this instance to compute, say, $\overline{1/
 
 However:
 
-$$(\overline{1/x_n} + 1) × \B (-n) = \frac {-27 + 1} {16} ≃ -1.625 < \frac 1 x ≃ - 1.623$$
+$$(\overline{1/x_n} + 1) × \B (-n) = \frac {-27 + 1} {16} = -1.625 < \frac 1 x ≃ - 1.623$$
 
 so the framing is not correct.
 
