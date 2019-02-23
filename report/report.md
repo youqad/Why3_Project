@@ -665,20 +665,20 @@ We add
 
     nothing really fancier than before: the only new case is `Inv t'`, and `msd` (which is called only there in `compute`) yields an `m` such that $\vert \texttt{interp } t \vert > \B (-m)$ (such an `m` always exists provided $\texttt{interp } t ≠ 0$, which is what we assume).
 
-    `mds` recursively calls itself until $\vert c \vert ≥ 2$ (where $c$ is the integer approximating $t$), thus straightforwardly ensuring the correction of the algorithm.
+    `msd` recursively calls itself until $\vert c \vert ≥ 2$ (where $c$ is the integer approximating $t$), thus straightforwardly ensuring the correction of the algorithm.
 
     In `compute`, the case where the sign is negative is easily treated, similarly to `compute_neg`, by taking the opposite.
 
-- The termination is a bit more involved because of `mds`:
+- The termination is a bit more involved because of `msd`:
 
     - when `compute t n` is called:
 
         - either `t` is structurally smaller
-        - either `t` remains the same and `compute` has been called inside `mds`
+        - either `t` remains the same and `compute` has been called inside `msd`
 
         which hints at the fact that an adequate variant would follow a lexicographic order, with the size of `t` as first component (where `size` is defined as expected).
 
-    - `mds` stops recursively calling itself as soon as $\vert c \vert > 1$.
+    - `msd` stops recursively calling itself as soon as $\vert c \vert > 1$.
 
         - if $\texttt{interp } t > 0$:
 
