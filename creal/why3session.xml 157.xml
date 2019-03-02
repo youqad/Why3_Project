@@ -29,6 +29,7 @@
   </goal>
   <goal name="VC shift_right.2" expl="postcondition" proved="true">
   <proof prover="0"><result status="valid" time="0.01" steps="8"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
   </goal>
  </transf>
  </goal>
@@ -83,6 +84,7 @@
   <goal name="VC isqrt.8" expl="assertion" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="VC isqrt.8.0" expl="assertion" proved="true">
+   <proof prover="0" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
    <proof prover="3" timelimit="5"><result status="valid" time="0.31"/></proof>
    </goal>
    <goal name="VC isqrt.8.1" expl="assertion" proved="true">
@@ -102,6 +104,7 @@
    </goal>
    <goal name="VC isqrt.8.6" expl="VC for isqrt" proved="true">
    <proof prover="0" timelimit="5"><result status="valid" time="3.02" steps="137"/></proof>
+   <proof prover="3" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
    </goal>
    <goal name="VC isqrt.8.7" expl="VC for isqrt" proved="true">
    <proof prover="0" timelimit="5"><result status="valid" time="0.51" steps="122"/></proof>
@@ -123,10 +126,12 @@
  </transf>
  </goal>
  <goal name="_B_non_neg" proved="true">
+ <proof prover="0" timelimit="5" obsolete="true"><result status="valid" time="0.01" steps="32"/></proof>
  <proof prover="3"><result status="valid" time="0.10"/></proof>
  </goal>
  <goal name="_B_group_homomorphism" proved="true">
  <proof prover="0"><result status="valid" time="0.01" steps="45"/></proof>
+ <proof prover="3"><result status="timeout" time="1.00"/></proof>
  </goal>
  <goal name="_B_inverse" proved="true">
  <proof prover="0" timelimit="5"><result status="valid" time="0.10" steps="134"/></proof>
@@ -156,6 +161,7 @@
  </goal>
  <goal name="pow_mul2_exp" proved="true">
  <proof prover="0" timelimit="5"><result status="valid" time="0.12" steps="62"/></proof>
+ <proof prover="2" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
  </goal>
  <goal name="VC round_z_over_4" expl="VC for round_z_over_4" proved="true">
  <transf name="split_vc" proved="true" >
@@ -236,6 +242,7 @@
    </goal>
    <goal name="VC compute_round.0.2" expl="VC for compute_round" proved="true">
    <proof prover="0"><result status="valid" time="0.09" steps="105"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
    <goal name="VC compute_round.0.3" expl="VC for compute_round" proved="true">
    <proof prover="0"><result status="valid" time="0.02" steps="88"/></proof>
@@ -271,6 +278,7 @@
  </goal>
  <goal name="VC compute_add" expl="VC for compute_add" proved="true">
  <proof prover="0"><result status="valid" time="0.02" steps="43"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
  </goal>
  <goal name="VC compute_neg" expl="VC for compute_neg" proved="true">
  <proof prover="0"><result status="valid" time="0.02" steps="92"/></proof>

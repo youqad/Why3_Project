@@ -70,7 +70,7 @@ let function isqrt (n:int) : int
       invariant { !sum = power (!count+1) 2 }
       variant {n - !sum}
       incr count;
-      sum += 2 * !count + 1
+      sum += 2 * !count + 1a
     done;
     assert { !count <= floor (sqrt (from_int n)) 
       by  let z = from_int !count in 
@@ -138,6 +138,10 @@ lemma pow_mul2_exp:
 predicate framing (x:real) (p:int) (n:int) =
   (from_int p -. 1.) *. (_B (-n)) <. x <. (from_int p +. 1.) *. (_B (-n))  
 
+
+(**** 4.1 Addition ****)
+(**********************)
+
 let round_z_over_4 (z : int)
   ensures { ((from_int z) -. 2.) *. (_B (-1)) 
   <. from_int result <=. ((from_int z) +. 2.) *. (_B (-1)) }
@@ -160,7 +164,7 @@ let round_z_over_4 (z : int)
             so  from_int (z-2) <. from_int (4 * res) = 4. *. from_int res };
     res
 
-let compute_round (n:int) (ghost z : real) (zp: int)
+let compute_round (n:int) (ghost z : real) (zp: int) 
   requires { (from_int zp -. 2.) *. _B (-(n+1)) <. z 
   <=. (from_int zp +. 2.) *. _B (-(n+1)) }
   ensures { framing z result n } 
@@ -184,7 +188,10 @@ let compute_add (n: int) (ghost x : real) (xp : int) (ghost y : real) (yp : int)
   ensures { framing (x+.y) result n }
   =
   compute_round n (x +. y) (xp + yp)
+  
 
+(**** 4.2 Substraction ****)
+(**************************)
 
 let compute_neg (n: int) (ghost x : real) (xp : int)
   requires { framing x xp n }
@@ -201,6 +208,9 @@ let compute_sub (n: int) (ghost x : real) (xp : int) (ghost y : real) (yp : int)
   let resu = compute_add n x xp (-.y) yp' in
   assert { framing (-.y) yp' (n+1) };
   resu
+  
+(**** 4.3 Integer Constants ****)
+(*******************************)
 
 let compute_cst (n: int) (x : int) : int
   ensures { framing (from_int x) result n } 
@@ -246,7 +256,7 @@ let compute_cst (n: int) (x : int) : int
 
 
 (**** 4.4 Square Root ****)
-(**************)
+(*************************)
 
 function _sqrt_incr (n:int) : real = inv (sqrt (from_int (n+1)) +. sqrt (from_int n)) 
 
@@ -372,7 +382,7 @@ let compute_sqrt (n: int) (ghost x : real) (xp : int)
 
     
 (**** 4.5 Compute ****)
-(**************)
+(*********************)
 
 type term =
   | Cst int
@@ -429,7 +439,7 @@ let rec compute (t:term) (n:int) : int
 *)
     
 (**** V. Division ****)
-(**************)
+(*********************)
 
 
 let lemma euclid_uniq (x y q : int) : unit
@@ -835,4 +845,3 @@ with msd (t:term) (n:int) (c:int) : (int, bool)
             so (from_int c +. 1.) *. _B (-n) <=. -.1. *. _B (-n) = -._B (-n) };
       n, false))
       
-(* variant { (t, max(2. - abs (_B n *. interp t), 0)) } *) 

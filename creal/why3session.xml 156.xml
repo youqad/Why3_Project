@@ -3,10 +3,11 @@
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="5">
 <prover id="0" name="Alt-Ergo" version="2.2.0" timelimit="1" steplimit="0" memlimit="1000"/>
-<prover id="1" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC3" version="2.4.1" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="2" name="Eprover" version="2.2" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="3" name="CVC4" version="1.6" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="4" name="Spass" version="3.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="5" name="Vampire" version="4.3.0" timelimit="10" steplimit="0" memlimit="4000"/>
 <prover id="6" name="Z3" version="4.8.4" timelimit="1" steplimit="0" memlimit="1000"/>
 <file name="../creal.mlw" proved="true">
 <theory name="Top">
@@ -29,6 +30,7 @@
   </goal>
   <goal name="VC shift_right.2">
   <proof prover="0"><result status="valid" time="0.01" steps="8"/></proof>
+  <proof prover="3"><result status="timeout" time="1.00"/></proof>
   </goal>
  </transf>
  </goal>
@@ -83,6 +85,7 @@
   <goal name="VC isqrt.8">
   <transf name="split_vc" >
    <goal name="VC isqrt.8.0">
+   <proof prover="0" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
    <proof prover="3" timelimit="5"><result status="valid" time="0.31"/></proof>
    </goal>
    <goal name="VC isqrt.8.1">
@@ -102,6 +105,7 @@
    </goal>
    <goal name="VC isqrt.8.6">
    <proof prover="0" timelimit="5"><result status="valid" time="3.02" steps="137"/></proof>
+   <proof prover="3" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
    </goal>
    <goal name="VC isqrt.8.7">
    <proof prover="0" timelimit="5"><result status="valid" time="0.51" steps="122"/></proof>
@@ -123,10 +127,12 @@
  </transf>
  </goal>
  <goal name="_B_non_neg">
+ <proof prover="0" timelimit="5" obsolete="true"><result status="valid" time="0.01" steps="32"/></proof>
  <proof prover="3"><result status="valid" time="0.10"/></proof>
  </goal>
  <goal name="_B_group_homomorphism">
  <proof prover="0"><result status="valid" time="0.01" steps="45"/></proof>
+ <proof prover="3"><result status="timeout" time="1.00"/></proof>
  </goal>
  <goal name="_B_inverse">
  <proof prover="0" timelimit="5"><result status="valid" time="0.10" steps="134"/></proof>
@@ -142,7 +148,7 @@
    <proof prover="0" timelimit="5"><result status="valid" time="0.01" steps="12"/></proof>
    </goal>
    <goal name="_B_spec_pos.0.1">
-   <proof prover="1"><result status="valid" time="0.03"/></proof>
+   <proof prover="1" timelimit="5"><result status="valid" time="0.03"/></proof>
    </goal>
   </transf>
   </goal>
@@ -156,6 +162,7 @@
  </goal>
  <goal name="pow_mul2_exp">
  <proof prover="0" timelimit="5"><result status="valid" time="0.12" steps="62"/></proof>
+ <proof prover="2" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
  </goal>
  <goal name="VC round_z_over_4">
  <transf name="split_vc" >
@@ -236,6 +243,7 @@
    </goal>
    <goal name="VC compute_round.0.2">
    <proof prover="0"><result status="valid" time="0.09" steps="105"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
    <goal name="VC compute_round.0.3">
    <proof prover="0"><result status="valid" time="0.02" steps="88"/></proof>
@@ -271,6 +279,7 @@
  </goal>
  <goal name="VC compute_add">
  <proof prover="0"><result status="valid" time="0.02" steps="43"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
  </goal>
  <goal name="VC compute_neg">
  <proof prover="0"><result status="valid" time="0.02" steps="92"/></proof>
@@ -1420,7 +1429,7 @@
   <proof prover="3"><result status="valid" time="0.11"/></proof>
   </goal>
   <goal name="VC compute.43">
-  <proof prover="0"><result status="valid" time="0.36" steps="215"/></proof>
+  <proof prover="0"><result status="valid" time="0.36" steps="214"/></proof>
   </goal>
   <goal name="VC compute.44">
   <proof prover="6"><result status="valid" time="0.06"/></proof>
@@ -1444,7 +1453,7 @@
   <proof prover="3"><result status="valid" time="0.14"/></proof>
   </goal>
   <goal name="VC compute.51">
-  <proof prover="0"><result status="valid" time="0.08" steps="154"/></proof>
+  <proof prover="0"><result status="valid" time="0.08" steps="153"/></proof>
   </goal>
  </transf>
  </goal>
@@ -1457,12 +1466,20 @@
    </goal>
    <goal name="VC msd.0.1">
    <proof prover="0"><result status="valid" time="0.02" steps="20"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
    <goal name="VC msd.0.2">
-   <proof prover="0"><result status="valid" time="0.02" steps="74"/></proof>
+   <proof prover="0"><result status="valid" time="0.02" steps="73"/></proof>
+   <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
+   <proof prover="3"><result status="timeout" time="1.00"/></proof>
+   <proof prover="4" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
+   <proof prover="5" obsolete="true"><undone/></proof>
+   <proof prover="6" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
    </goal>
    <goal name="VC msd.0.3">
-   <proof prover="0"><result status="valid" time="0.02" steps="75"/></proof>
+   <proof prover="0"><result status="valid" time="0.02" steps="74"/></proof>
+   <proof prover="3"><result status="timeout" time="1.00"/></proof>
    </goal>
    <goal name="VC msd.0.4">
    <proof prover="3"><result status="valid" time="0.12"/></proof>
@@ -1484,6 +1501,7 @@
    </goal>
    <goal name="VC msd.0.10">
    <proof prover="0"><result status="valid" time="0.03" steps="31"/></proof>
+   <proof prover="3"><result status="timeout" time="1.00"/></proof>
    </goal>
    <goal name="VC msd.0.11">
    <proof prover="3"><result status="valid" time="0.19"/></proof>
@@ -1495,7 +1513,7 @@
    <proof prover="3"><result status="valid" time="0.12"/></proof>
    </goal>
    <goal name="VC msd.0.14">
-   <proof prover="2"><result status="valid" time="0.44"/></proof>
+   <proof prover="2"><result status="valid" time="0.28"/></proof>
    </goal>
    <goal name="VC msd.0.15">
    <proof prover="0"><result status="valid" time="0.04" steps="40"/></proof>
@@ -1504,33 +1522,17 @@
    <proof prover="0"><result status="valid" time="0.04" steps="40"/></proof>
    </goal>
    <goal name="VC msd.0.17">
-   <proof prover="3"><result status="valid" time="0.10"/></proof>
-   </goal>
-   <goal name="VC msd.0.18">
-   <proof prover="3"><result status="valid" time="0.24"/></proof>
-   </goal>
-   <goal name="VC msd.0.19">
-   <proof prover="3"><result status="valid" time="0.13"/></proof>
-   </goal>
-   <goal name="VC msd.0.20">
-   <proof prover="3"><result status="valid" time="0.34"/></proof>
-   </goal>
-   <goal name="VC msd.0.21">
-   <proof prover="2"><result status="valid" time="0.10"/></proof>
-   </goal>
-   <goal name="VC msd.0.22">
-   <proof prover="0"><result status="valid" time="0.08" steps="54"/></proof>
-   </goal>
-   <goal name="VC msd.0.23">
-   <proof prover="0"><result status="valid" time="0.10" steps="54"/></proof>
-   </goal>
-   <goal name="VC msd.0.24">
-   <proof prover="3"><result status="valid" time="0.28"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="VC msd.1">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="highfailure" time="0.07"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="5" timelimit="1" memlimit="1000" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="6" obsolete="true"><result status="timeout" time="1.00"/></proof>
   </goal>
   <goal name="VC msd.2">
   <proof prover="3"><result status="valid" time="0.07"/></proof>
@@ -1539,7 +1541,6 @@
   <proof prover="3"><result status="valid" time="0.09"/></proof>
   </goal>
   <goal name="VC msd.4">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
   </goal>
   <goal name="VC msd.5">
   <proof prover="3"><result status="valid" time="0.12"/></proof>
@@ -1626,84 +1627,57 @@
   <goal name="VC msd.14">
   <transf name="split_vc" >
    <goal name="VC msd.14.0">
-   <proof prover="3"><result status="valid" time="0.12"/></proof>
+   <proof prover="3" obsolete="true"><result status="valid" time="0.12"/></proof>
    </goal>
    <goal name="VC msd.14.1">
-   <proof prover="0"><result status="valid" time="0.02" steps="23"/></proof>
+   <proof prover="0" obsolete="true"><result status="valid" time="0.02" steps="20"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
    <goal name="VC msd.14.2">
-   <proof prover="0"><result status="valid" time="0.02" steps="90"/></proof>
+   <proof prover="0" obsolete="true"><result status="valid" time="0.02" steps="73"/></proof>
+   <proof prover="1" obsolete="true"><result status="highfailure" time="0.05"/></proof>
+   <proof prover="2" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
+   <proof prover="4" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
+   <proof prover="5" obsolete="true"><undone/></proof>
+   <proof prover="6" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00"/></proof>
    </goal>
    <goal name="VC msd.14.3">
-   <proof prover="0"><result status="valid" time="0.02" steps="114"/></proof>
+   <proof prover="0" obsolete="true"><result status="valid" time="0.02" steps="74"/></proof>
+   <proof prover="3" obsolete="true"><result status="timeout" time="1.00"/></proof>
    </goal>
    <goal name="VC msd.14.4">
-   <proof prover="0"><result status="valid" time="0.02" steps="23"/></proof>
+   <proof prover="3" obsolete="true"><result status="valid" time="0.12"/></proof>
    </goal>
    <goal name="VC msd.14.5">
-   <proof prover="3"><result status="valid" time="0.25"/></proof>
    </goal>
    <goal name="VC msd.14.6">
-   <proof prover="3"><result status="valid" time="0.09"/></proof>
    </goal>
    <goal name="VC msd.14.7">
-   <proof prover="3"><result status="valid" time="0.09"/></proof>
    </goal>
    <goal name="VC msd.14.8">
-   <proof prover="3"><result status="valid" time="0.07"/></proof>
    </goal>
    <goal name="VC msd.14.9">
-   <proof prover="3"><result status="valid" time="0.06"/></proof>
    </goal>
    <goal name="VC msd.14.10">
-   <proof prover="0"><result status="valid" time="0.02" steps="37"/></proof>
    </goal>
    <goal name="VC msd.14.11">
-   <proof prover="3"><result status="valid" time="0.19"/></proof>
    </goal>
    <goal name="VC msd.14.12">
-   <proof prover="3"><result status="valid" time="0.12"/></proof>
    </goal>
    <goal name="VC msd.14.13">
-   <proof prover="3"><result status="valid" time="0.12"/></proof>
    </goal>
    <goal name="VC msd.14.14">
-   <proof prover="2"><result status="valid" time="0.34"/></proof>
    </goal>
    <goal name="VC msd.14.15">
-   <proof prover="0"><result status="valid" time="0.04" steps="46"/></proof>
    </goal>
    <goal name="VC msd.14.16">
-   <proof prover="0"><result status="valid" time="0.04" steps="46"/></proof>
    </goal>
    <goal name="VC msd.14.17">
-   <proof prover="3"><result status="valid" time="0.10"/></proof>
-   </goal>
-   <goal name="VC msd.14.18">
-   <proof prover="3"><result status="valid" time="0.24"/></proof>
-   </goal>
-   <goal name="VC msd.14.19">
-   <proof prover="3"><result status="valid" time="0.13"/></proof>
-   </goal>
-   <goal name="VC msd.14.20">
-   <proof prover="3"><result status="valid" time="0.34"/></proof>
-   </goal>
-   <goal name="VC msd.14.21">
-   <proof prover="2"><result status="valid" time="0.10"/></proof>
-   </goal>
-   <goal name="VC msd.14.22">
-   <proof prover="0"><result status="valid" time="0.08" steps="60"/></proof>
-   </goal>
-   <goal name="VC msd.14.23">
-   <proof prover="0"><result status="valid" time="0.11" steps="60"/></proof>
-   </goal>
-   <goal name="VC msd.14.24">
-   <proof prover="3"><result status="valid" time="0.31"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="VC msd.15">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
   </goal>
   <goal name="VC msd.16">
   <proof prover="3"><result status="valid" time="0.08"/></proof>
@@ -1712,7 +1686,6 @@
   <proof prover="3"><result status="valid" time="0.10"/></proof>
   </goal>
   <goal name="VC msd.18">
-  <proof prover="3"><result status="valid" time="0.06"/></proof>
   </goal>
   <goal name="VC msd.19">
   <proof prover="3"><result status="valid" time="0.10"/></proof>
@@ -1744,7 +1717,7 @@
    <proof prover="3"><result status="valid" time="0.16"/></proof>
    </goal>
    <goal name="VC msd.23.5">
-   <proof prover="2" timelimit="10" memlimit="4000"><result status="valid" time="2.34"/></proof>
+   <proof prover="2" timelimit="10" memlimit="4000"><result status="valid" time="1.89"/></proof>
    </goal>
   </transf>
   </goal>
@@ -1760,7 +1733,7 @@
    <proof prover="3"><result status="valid" time="0.33"/></proof>
    </goal>
    <goal name="VC msd.24.3">
-   <proof prover="0"><result status="valid" time="0.03" steps="85"/></proof>
+   <proof prover="0"><result status="valid" time="0.03" steps="84"/></proof>
    </goal>
    <goal name="VC msd.24.4">
    <proof prover="3"><result status="valid" time="0.17"/></proof>
